@@ -8,12 +8,16 @@ float rate = -600.0;
 void setup() {
     frameRate(500);
     size(800, 600, P3D);
+<<<<<<< Updated upstream
     s = loadShape("House/hause3.obj");
+=======
+    s = loadShape("Revolver.obj");
+>>>>>>> Stashed changes
     s.scale(-50);
 }
 
 void draw() {
-    background(111, 211, 16);
+    background(255);
     translate(width/2, 3 * height/5, 0);
     //rotateX(PI);
     rotateY(-PI/2 + frameCount/rate);
