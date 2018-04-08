@@ -8,7 +8,7 @@ float rate = -600.0;
 void setup() {
     frameRate(500);
     size(800, 600, P3D);
-    s = loadShape("hause3.obj");
+    s = loadShape("House/hause3.obj");
     s.scale(-50);
 }
 
