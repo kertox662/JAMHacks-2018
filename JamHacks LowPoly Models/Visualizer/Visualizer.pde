@@ -8,9 +8,6 @@ float rate = -600.0;
 void setup() {
     frameRate(500);
     size(800, 600, P3D);
-<<<<<<< Updated upstream
-    s = loadShape("House/hause3.obj");
-=======
     s = loadShape("Revolver.obj");
 >>>>>>> Stashed changes
     s.scale(-50);
