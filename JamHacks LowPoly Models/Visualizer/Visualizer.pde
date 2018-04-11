@@ -8,8 +8,7 @@ float rate = -600.0;
 void setup() {
     frameRate(500);
     size(800, 600, P3D);
-    s = loadShape("Revolver.obj");
->>>>>>> Stashed changes
+    s = loadShape("LPSnowPine.obj");
     s.scale(-50);
 }
 

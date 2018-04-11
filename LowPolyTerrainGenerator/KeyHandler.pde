@@ -29,18 +29,18 @@ void keyReleased() {
 
 void keyRespond() {
     if (leftPressed) {
-        directionAngle -= 0.01;
+        directionAngle -= 0.1;
     }
     if (rightPressed) {
-        directionAngle += 0.01;
+        directionAngle += 0.1;
     }
     if (upPressed) {
         println(PVector.fromAngle(directionAngle));
-        cameraX += PVector.fromAngle(directionAngle).x;
-        cameraY += PVector.fromAngle(directionAngle).y;
+        cameraY += moveSpeed * sin(directionAngle);//PVector.fromAngle(directionAngle).x;
+        cameraX += moveSpeed * cos(directionAngle);
     }
     if (downPressed) {
-        cameraX -= PVector.fromAngle(directionAngle).x;
-        cameraY -= PVector.fromAngle(directionAngle).y;
+        cameraY -= moveSpeed * sin(directionAngle);
+        cameraX -= moveSpeed * cos(directionAngle);
     }
 }
