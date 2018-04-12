@@ -4,27 +4,43 @@ int tileSize = 20;
 float[][] heights = new float[gridLength][gridWidth];
 float moveSpeed = 5;
 
+Tree[] treeArray;
+int treeCount = 30;
+
+Grass[] grassArray;
+int grassCount = 300;
+
 PShape revolver1;
 PShape LPTree1;
 PShape LPTree2;
 
 void setup() {
     size(800, 600, P3D);
-    revolver1 = loadShape("Revolver1.obj");
-    LPTree1 = loadShape("Trees/Tree1/LPTree1.obj");
-    LPTree2 = loadShape("Trees/Tree2/LPTree2.obj");
     for (int i = 0; i < gridLength; i++) {
         for (int j = 0; j < gridWidth; j++) {
             heights[i][j] = random(-2, 2);
         }
+    }
+    revolver1 = loadShape("Revolver1.obj");
+    //LPTree1 = loadShape("Trees/Tree1/LPTree1.obj");
+    //LPTree2 = loadShape("Trees/Tree2/LPTree2.obj");
+    treeArray = new Tree[treeCount];
+    for (int i = 0; i < treeCount; i++) {
+        treeArray[i] = new Tree();
+    }
+    
+    grassArray = new Grass[grassCount];
+    for (int i = 0; i < grassCount; i++) {
+        grassArray[i] = new Grass();
     }
 }
 
 int cameraX = 0;
 int cameraY = 0;
 int cameraZ = 100;
-float directionAngle = PI/2;
+float directionAngle = PI/-2;
 void draw() {
+    println(frameRate + " FPS");
     lights();
     keyRespond();
     PVector direction = PVector.fromAngle(directionAngle);
@@ -32,15 +48,23 @@ void draw() {
     background(82, 210, 255);
     drawTerrain();
     drawRevolver();
-    pushMatrix();
-    translate(0, 0, 0);
-    rotateX(PI/2);
-    scale(100);
-    shape(LPTree2);
-    popMatrix();
+    //pushMatrix();
+    //translate(0, 0, 0);
+    //rotateX(PI/2);
+    //scale(100);
+    //shape(LPTree2);
+    //popMatrix();
+    for (int i = 0; i < treeCount; i++) {
+        Tree t = treeArray[i];
+        t.drawTree();
+    }
+    for (int i = 0; i < grassCount; i++) {
+        Grass g = grassArray[i];
+        g.drawGrass();
+    }
 }
 
-void drawRevolver(){
+void drawRevolver() {
     pushMatrix();
     translate(cameraX, cameraY, cameraZ);
     rotateZ(directionAngle - PI/2);
@@ -53,12 +77,13 @@ void drawRevolver(){
     popMatrix();
 }
 
+
 void drawTerrain() {
     fill(144, 245, 0);
     for (int i = 0; i < gridWidth - 1; i++) {
         //beginShape(TRIANGLE_STRIP);
         for (int j = 0; j < gridLength - 1; j++) {
-            
+
             if (dist(tileSize * (i + 0.5 - gridLength/2), tileSize * (j - gridWidth/2), cameraX, cameraY) < 700) {
                 if (true) {//PVector.angleBetween(new PVector(-sqrt(3), -1), new PVector(1, -sqrt(3)))){
                     pushMatrix();

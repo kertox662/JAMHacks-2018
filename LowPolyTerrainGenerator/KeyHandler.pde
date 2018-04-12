@@ -35,7 +35,7 @@ void keyRespond() {
         directionAngle += 0.1;
     }
     if (upPressed) {
-        println(PVector.fromAngle(directionAngle));
+        //println(PVector.fromAngle(directionAngle));
         cameraY += moveSpeed * sin(directionAngle);//PVector.fromAngle(directionAngle).x;
         cameraX += moveSpeed * cos(directionAngle);
     }
