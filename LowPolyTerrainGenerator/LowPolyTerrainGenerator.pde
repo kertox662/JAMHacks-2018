@@ -25,6 +25,7 @@ int cameraY = 0;
 int cameraZ = 100;
 float directionAngle = PI/2;
 void draw() {
+    lights();
     keyRespond();
     PVector direction = PVector.fromAngle(directionAngle);
     camera(cameraX, cameraY, cameraZ, cameraX + direction.x, cameraY + direction.y, cameraZ, 0.0, 0.0, -1.0);
@@ -54,8 +55,10 @@ void drawRevolver(){
 
 void drawTerrain() {
     fill(144, 245, 0);
-    for (int i = 0; i < gridLength - 1; i++) {
-        for (int j = 0; j < gridWidth - 1; j++) {
+    for (int i = 0; i < gridWidth - 1; i++) {
+        //beginShape(TRIANGLE_STRIP);
+        for (int j = 0; j < gridLength - 1; j++) {
+            
             if (dist(tileSize * (i + 0.5 - gridLength/2), tileSize * (j - gridWidth/2), cameraX, cameraY) < 700) {
                 if (true) {//PVector.angleBetween(new PVector(-sqrt(3), -1), new PVector(1, -sqrt(3)))){
                     pushMatrix();
