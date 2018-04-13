@@ -29,19 +29,19 @@ void keyReleased() {
 
 void keyRespond() {
     if (leftPressed) {
-        cameraX -= moveSpeed / (frameRate/60) * sin(xAngle);
-        cameraY -= moveSpeed / (frameRate/60) * cos(xAngle);
+        cameraX -= moveSpeed / (frameRate/60) * sin(xAngle - PI/2);
+        cameraY -= moveSpeed / (frameRate/60) * cos(xAngle - PI/2);
     }
     if (rightPressed) {
+        cameraX -= moveSpeed / (frameRate/60) * sin(PI/2 + xAngle);
+        cameraY -= moveSpeed / (frameRate/60) * cos(PI/2 + xAngle);
+    }
+    if (upPressed) {
         cameraX += moveSpeed / (frameRate/60) * sin(xAngle);
         cameraY += moveSpeed / (frameRate/60) * cos(xAngle);
     }
-    if (upPressed) {
-        cameraY -= moveSpeed / (frameRate/60) * sin(xAngle);
-        cameraX -= moveSpeed / (frameRate/60) * cos(xAngle);
-    }
     if (downPressed) {
-        cameraY += moveSpeed / (frameRate/60) * sin(xAngle);
-        cameraX += moveSpeed / (frameRate/60) * cos(xAngle);
+        cameraX -= moveSpeed / (frameRate/60) * sin(xAngle);
+        cameraY -= moveSpeed / (frameRate/60) * cos(xAngle);
     }
 }
