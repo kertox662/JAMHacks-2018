@@ -26,7 +26,7 @@ PShape dryGrass4;
 Robot robot;
 
 void setup() {
-    //noCursor();
+    noCursor();
     try {
         robot = new Robot();
     }
@@ -54,11 +54,13 @@ void setup() {
 
 void mouseMoved(){
     println(pmouseY - mouseY, pmouseX - mouseX);
-    PVector moveAngle = PVector.fromAngle(atan2(pmouseY - mouseY, pmouseX - mouseX)).mult(0.1);
-    xAngle += moveAngle.x;
-    yAngle += moveAngle.y;
+    PVector moveAngle = PVector.fromAngle(atan2(pmouseY - mouseY, pmouseX - mouseX)).mult(0.05);
+    targetXAngle += moveAngle.x;
+    targetYAngle += moveAngle.y;
 }
 
+float targetXAngle = 0;
+float targetYAngle = 0;
 //Horizontal camera angle.
 float xAngle = 0;
 //Vertical camera angle.
@@ -98,6 +100,8 @@ void draw() {
         Grass g = grassArray[i];
         g.drawGrass();
     }
+    xAngle = (xAngle + targetXAngle)/2;
+    yAngle = (yAngle + targetYAngle)/2;
 }
 
 void drawRevolver() {
