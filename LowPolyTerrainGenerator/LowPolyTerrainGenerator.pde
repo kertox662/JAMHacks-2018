@@ -1,3 +1,5 @@
+import java.awt.Robot;
+
 int gridLength = 100;
 int gridWidth = 100;
 int tileSize = 20;
@@ -8,11 +10,21 @@ Tree[] treeArray;
 int treeCount = 30;
 
 Grass[] grassArray;
-int grassCount = 300;
+int grassCount = 100;
 
 PShape revolver1;
 PShape LPTree1;
 PShape LPTree2;
+PShape Grass1;
+PShape Grass2;
+PShape Grass3;
+PShape Grass4;
+PShape DryGrass1;
+PShape DryGrass2;
+PShape DryGrass3;
+PShape DryGrass4;
+
+//Robot robot = new Robot();
 
 void setup() {
     size(800, 600, P3D);
@@ -22,8 +34,17 @@ void setup() {
         }
     }
     revolver1 = loadShape("Revolver1.obj");
-    //LPTree1 = loadShape("Trees/Tree1/LPTree1.obj");
-    //LPTree2 = loadShape("Trees/Tree2/LPTree2.obj");
+    LPTree1 = loadShape("Trees/Tree1/LPTree1.obj");
+    LPTree2 = loadShape("Trees/Tree2/LPTree2.obj");
+    Grass1 = loadShape("Grass/Grass1/LPGrass1.obj");
+    Grass2 = loadShape("Grass/Grass2/LPGrass2.obj");
+    Grass3 = loadShape("Grass/Grass3/LPGrass3.obj");
+    Grass4 = loadShape("Grass/Grass4/LPGrass4.obj");
+    DryGrass1 = loadShape("Grass/DryGrass1/LPDryGrass1.obj");
+    DryGrass2 = loadShape("Grass/DryGrass2/LPDryGrass2.obj");
+    DryGrass3 = loadShape("Grass/DryGrass3/LPDryGrass3.obj");
+    DryGrass4 = loadShape("Grass/DryGrass4/LPDryGrass4.obj");
+
     treeArray = new Tree[treeCount];
     for (int i = 0; i < treeCount; i++) {
         treeArray[i] = new Tree();
@@ -40,6 +61,7 @@ int cameraY = 0;
 int cameraZ = 100;
 float directionAngle = PI/-2;
 void draw() {
+    //Robot.mouseMove(100, 100);
     println(frameRate + " FPS");
     lights();
     keyRespond();
@@ -48,12 +70,6 @@ void draw() {
     background(82, 210, 255);
     drawTerrain();
     drawRevolver();
-    //pushMatrix();
-    //translate(0, 0, 0);
-    //rotateX(PI/2);
-    //scale(100);
-    //shape(LPTree2);
-    //popMatrix();
     for (int i = 0; i < treeCount; i++) {
         Tree t = treeArray[i];
         t.drawTree();

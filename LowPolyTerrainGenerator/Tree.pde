@@ -2,7 +2,7 @@ class Tree extends GameObject{
      
      Tree(){
          super();
-         objModels = new String[]{"Trees/Tree1/LPTree1.obj", "Trees/Tree2/LPTree2.obj"};
+         objModels = new PShape[]{LPTree1, LPTree2};
          loadModel();
      }
      

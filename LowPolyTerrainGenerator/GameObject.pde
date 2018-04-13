@@ -1,5 +1,5 @@
-class GameObject {
-    String[] objModels = new String[10];
+abstract class GameObject {
+    PShape[] objModels = new PShape[10];
     PShape model;
     PVector position;
     float rotation;
@@ -16,7 +16,7 @@ class GameObject {
     }
     
     void loadModel(){
-        model = loadShape(objModels[int(random(0, objModels.length))]);
+        model = objModels[int(random(0, objModels.length))];
     }
     
     void drawModel() {
