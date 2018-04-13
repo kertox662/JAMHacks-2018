@@ -43,5 +43,5 @@ void keyRespond() {
     if (downPressed) {
         cameraX -= moveSpeed / (frameRate/60) * sin(xAngle);
         cameraY -= moveSpeed / (frameRate/60) * cos(xAngle);
-    }
+    } //<>//
 }
