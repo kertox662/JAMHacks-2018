@@ -1,7 +1,7 @@
 class Grass extends GameObject{
     Grass(){
          super();
-         objModels = new PShape[]{Grass1, Grass2, Grass3, Grass4, DryGrass1, DryGrass2, DryGrass3, DryGrass4};
+         objModels = new PShape[]{grass1, grass2, grass3, grass4, dryGrass1, dryGrass2, dryGrass3, dryGrass4};
          loadModel();
      }
      

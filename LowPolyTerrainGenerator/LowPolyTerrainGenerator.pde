@@ -13,47 +13,69 @@ Grass[] grassArray;
 int grassCount = 100;
 
 PShape revolver1;
-PShape LPTree1;
-PShape LPTree2;
-PShape Grass1;
-PShape Grass2;
-PShape Grass3;
-PShape Grass4;
-PShape DryGrass1;
-PShape DryGrass2;
-PShape DryGrass3;
-PShape DryGrass4;
-
-//Robot robot = new Robot();
+PShape tree1;
+PShape tree2;
+PShape grass1;
+PShape grass2;
+PShape grass3;
+PShape grass4;
+PShape dryGrass1;
+PShape dryGrass2;
+PShape dryGrass3;
+PShape dryGrass4;
+Robot robot;
 
 void setup() {
+    //noCursor();
+    try {
+        robot = new Robot();
+    }
+    catch (Exception e) {
+    }
     size(800, 600, P3D);
     for (int i = 0; i < gridLength; i++) {
         for (int j = 0; j < gridWidth; j++) {
             heights[i][j] = random(-2, 2);
         }
     }
-    revolver1 = loadShape("Revolver1.obj");
-    LPTree1 = loadShape("Trees/Tree1/LPTree1.obj");
-    LPTree2 = loadShape("Trees/Tree2/LPTree2.obj");
-    Grass1 = loadShape("Grass/Grass1/LPGrass1.obj");
-    Grass2 = loadShape("Grass/Grass2/LPGrass2.obj");
-    Grass3 = loadShape("Grass/Grass3/LPGrass3.obj");
-    Grass4 = loadShape("Grass/Grass4/LPGrass4.obj");
-    DryGrass1 = loadShape("Grass/DryGrass1/LPDryGrass1.obj");
-    DryGrass2 = loadShape("Grass/DryGrass2/LPDryGrass2.obj");
-    DryGrass3 = loadShape("Grass/DryGrass3/LPDryGrass3.obj");
-    DryGrass4 = loadShape("Grass/DryGrass4/LPDryGrass4.obj");
+
+    loadGameShapes();
 
     treeArray = new Tree[treeCount];
     for (int i = 0; i < treeCount; i++) {
         treeArray[i] = new Tree();
     }
-    
+
     grassArray = new Grass[grassCount];
     for (int i = 0; i < grassCount; i++) {
         grassArray[i] = new Grass();
     }
+}
+
+void mouseMoved(){
+    println(pmouseY - mouseY, pmouseX - mouseX);
+    PVector moveAngle = PVector.fromAngle(atan2(pmouseY - mouseY, pmouseX - mouseX)).mult(0.1);
+    xAngle += moveAngle.x;
+    yAngle += moveAngle.y;
+}
+
+//Horizontal camera angle.
+float xAngle = 0;
+//Vertical camera angle.
+float yAngle = 0;
+
+void loadGameShapes() {
+    revolver1 = loadShape("Revolver1.obj");
+    tree1 = loadShape("Trees/Tree1/LPTree1.obj");
+    tree2 = loadShape("Trees/Tree2/LPTree2.obj");
+    grass1 = loadShape("Grass/Grass1/LPGrass1.obj");
+    grass2 = loadShape("Grass/Grass2/LPGrass2.obj");
+    grass3 = loadShape("Grass/Grass3/LPGrass3.obj");
+    grass4 = loadShape("Grass/Grass4/LPGrass4.obj");
+    dryGrass1 = loadShape("Grass/DryGrass1/LPDryGrass1.obj");
+    dryGrass2 = loadShape("Grass/DryGrass2/LPDryGrass2.obj");
+    dryGrass3 = loadShape("Grass/DryGrass3/LPDryGrass3.obj");
+    dryGrass4 = loadShape("Grass/DryGrass4/LPDryGrass4.obj");
 }
 
 int cameraX = 0;
@@ -61,12 +83,10 @@ int cameraY = 0;
 int cameraZ = 100;
 float directionAngle = PI/-2;
 void draw() {
-    //Robot.mouseMove(100, 100);
-    println(frameRate + " FPS");
+    robot.mouseMove(displayWidth/2, displayHeight/2);
     lights();
     keyRespond();
-    PVector direction = PVector.fromAngle(directionAngle);
-    camera(cameraX, cameraY, cameraZ, cameraX + direction.x, cameraY + direction.y, cameraZ, 0.0, 0.0, -1.0);
+    camera(cameraX, cameraY, cameraZ, cameraX + sin(xAngle), cameraY + cos(xAngle), cameraZ + sin(yAngle), 0.0, 0.0, -1.0);
     background(82, 210, 255);
     drawTerrain();
     drawRevolver();
@@ -83,7 +103,7 @@ void draw() {
 void drawRevolver() {
     pushMatrix();
     translate(cameraX, cameraY, cameraZ);
-    rotateZ(directionAngle - PI/2);
+    rotateZ(xAngle);
     translate(-width/20, 90, -height/24);
     rotateX(0.1 + PI/2);
     rotateZ(PI/16);

@@ -12,7 +12,7 @@ abstract class GameObject {
         float zCoor = heights[int((xCoor + xRange)/tileSize - 1)][int((yCoor + yRange)/tileSize - 1)];
         position = new PVector(xCoor, yCoor, zCoor);
         rotation = random(0, 2*PI);
-        scaleFactor = int(random(80, 101));
+        scaleFactor = int(random(100, 101));
     }
     
     void loadModel(){

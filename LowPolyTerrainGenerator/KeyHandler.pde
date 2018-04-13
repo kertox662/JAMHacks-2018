@@ -29,18 +29,19 @@ void keyReleased() {
 
 void keyRespond() {
     if (leftPressed) {
-        directionAngle -= 0.1;
+        cameraX -= moveSpeed / (frameRate/60) * sin(xAngle);
+        cameraY -= moveSpeed / (frameRate/60) * cos(xAngle);
     }
     if (rightPressed) {
-        directionAngle += 0.1;
+        cameraX += moveSpeed / (frameRate/60) * sin(xAngle);
+        cameraY += moveSpeed / (frameRate/60) * cos(xAngle);
     }
     if (upPressed) {
-        //println(PVector.fromAngle(directionAngle));
-        cameraY += moveSpeed * sin(directionAngle);//PVector.fromAngle(directionAngle).x;
-        cameraX += moveSpeed * cos(directionAngle);
+        cameraY -= moveSpeed / (frameRate/60) * sin(xAngle);
+        cameraX -= moveSpeed / (frameRate/60) * cos(xAngle);
     }
     if (downPressed) {
-        cameraY -= moveSpeed * sin(directionAngle);
-        cameraX -= moveSpeed * cos(directionAngle);
+        cameraY += moveSpeed / (frameRate/60) * sin(xAngle);
+        cameraX += moveSpeed / (frameRate/60) * cos(xAngle);
     }
 }
