@@ -53,10 +53,10 @@ void setup() {
 }
 
 void mouseMoved(){
-    println(pmouseY - mouseY, pmouseX - mouseX);
     PVector moveAngle = PVector.fromAngle(atan2(pmouseY - mouseY, pmouseX - mouseX)).mult(0.05);
     targetXAngle += moveAngle.x;
     targetYAngle += moveAngle.y;
+    println(targetXAngle, targetYAngle);
 }
 
 float targetXAngle = 0;
@@ -107,7 +107,8 @@ void draw() {
 void drawRevolver() {
     pushMatrix();
     translate(cameraX, cameraY, cameraZ);
-    rotateZ(xAngle);
+    rotateZ(-xAngle);
+    rotateX(yAngle/1.5);
     translate(-width/20, 90, -height/24);
     rotateX(0.1 + PI/2);
     rotateZ(PI/16);
