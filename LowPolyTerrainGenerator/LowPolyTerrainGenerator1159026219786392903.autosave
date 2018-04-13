@@ -26,7 +26,7 @@ PShape dryGrass4;
 Robot robot;
 
 void setup() {
-    noCursor();
+    //noCursor();
     try {
         robot = new Robot();
     }
@@ -53,23 +53,19 @@ void setup() {
 }
 
 void mouseMoved(){
-    PVector moveAngle = PVector.fromAngle(atan2(pmouseY - mouseY, pmouseX - mouseX)).mult(0.05);
-    targetXAngle += moveAngle.x;
-    
-    targetYAngle += moveAngle.y;
-    targetYAngle = min(PI/2, max(-PI/2, targetYAngle));
-    println(targetXAngle, targetYAngle);
+    println(pmouseY - mouseY, pmouseX - mouseX);
+    PVector moveAngle = PVector.fromAngle(atan2(pmouseY - mouseY, pmouseX - mouseX)).mult(0.01);
+    xAngle += moveAngle.x;
+    yAngle += moveAngle.y;
 }
 
-float targetXAngle = 0;
-float targetYAngle = 0;
 //Horizontal camera angle.
 float xAngle = 0;
 //Vertical camera angle.
 float yAngle = 0;
 
 void loadGameShapes() {
-    revolver1 = loadShape("Sig2.obj");
+    revolver1 = loadShape("Revolver1.obj");
     tree1 = loadShape("Trees/Tree1/LPTree1.obj");
     tree2 = loadShape("Trees/Tree2/LPTree2.obj");
     grass1 = loadShape("Grass/Grass1/LPGrass1.obj");
@@ -102,19 +98,16 @@ void draw() {
         Grass g = grassArray[i];
         g.drawGrass();
     }
-    xAngle = (xAngle + targetXAngle)/2;
-    yAngle = (yAngle + targetYAngle)/2;
 }
 
 void drawRevolver() {
     pushMatrix();
     translate(cameraX, cameraY, cameraZ);
-    rotateZ(-xAngle);
-    //rotateX(yAngle/1.5);
+    rotateZ(xAngle);
     translate(-width/20, 90, -height/24);
     rotateX(0.1 + PI/2);
-    //rotateZ(-PI/16);
-    rotateY(PI);
+    rotateZ(PI/16);
+    rotateY(-PI/16);
     scale(6);
     shape(revolver1);
     popMatrix();
