@@ -4,25 +4,25 @@ boolean upPressed = false;
 boolean downPressed = false;
 
 void keyPressed() {
-    if (keyCode == LEFT) {
+    if (key == 'a') {
         leftPressed = true;
-    } else if (keyCode == RIGHT) {
+    } else if (key == 'd') {
         rightPressed = true;
-    } else if (keyCode == UP) {
+    } else if (key == 'w') {
         upPressed = true;
-    } else if (keyCode == DOWN) {
+    } else if (key == 's') {
         downPressed = true;
     }
 }
 
 void keyReleased() {
-    if (keyCode == LEFT) {
+    if (key == 'a') {
         leftPressed = false;
-    } else if (keyCode == RIGHT) {
+    } else if (key == 'd') {
         rightPressed = false;
-    } else if (keyCode == UP) {
+    } else if (key == 'w') {
         upPressed = false;
-    } else if (keyCode == DOWN) {
+    } else if (key == 's') {
         downPressed = false;
     }
 }

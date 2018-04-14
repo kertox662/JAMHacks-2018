@@ -27,12 +27,13 @@ Robot robot;
 
 void setup() {
     noCursor();
+    frameRate(120);
     try {
         robot = new Robot();
     }
     catch (Exception e) {
     }
-    size(800, 600, P3D);
+    fullScreen(P3D);
     for (int i = 0; i < gridLength; i++) {
         for (int j = 0; j < gridWidth; j++) {
             heights[i][j] = random(-2, 2);
@@ -53,12 +54,11 @@ void setup() {
 }
 
 void mouseMoved(){
-    PVector moveAngle = PVector.fromAngle(atan2(pmouseY - mouseY, pmouseX - mouseX)).mult(0.05);
+    PVector moveAngle = PVector.fromAngle(atan2(pmouseY - mouseY, pmouseX - mouseX)).mult(0.02);
     targetXAngle += moveAngle.x;
     
     targetYAngle += moveAngle.y;
     targetYAngle = min(PI/2, max(-PI/2, targetYAngle));
-    println(targetXAngle, targetYAngle);
 }
 
 float targetXAngle = 0;
@@ -86,14 +86,16 @@ int cameraX = 0;
 int cameraY = 0;
 int cameraZ = 100;
 float directionAngle = PI/-2;
+boolean doneFrame = false;
 void draw() {
     robot.mouseMove(displayWidth/2, displayHeight/2);
+    doneFrame = false;
     lights();
     keyRespond();
-    camera(cameraX, cameraY, cameraZ, cameraX + sin(xAngle), cameraY + cos(xAngle), cameraZ + sin(yAngle), 0.0, 0.0, -1.0);
     background(82, 210, 255);
     drawTerrain();
     drawRevolver();
+    camera(cameraX, cameraY, cameraZ, cameraX + sin(xAngle), cameraY + cos(xAngle), cameraZ + sin(yAngle), 0.0, 0.0, -1.0);
     for (int i = 0; i < treeCount; i++) {
         Tree t = treeArray[i];
         t.drawTree();
@@ -102,18 +104,29 @@ void draw() {
         Grass g = grassArray[i];
         g.drawGrass();
     }
-    xAngle = (xAngle + targetXAngle)/2;
-    yAngle = (yAngle + targetYAngle)/2;
+    xAngle = xAngle + (targetXAngle - xAngle)/4;
+    yAngle = yAngle + (targetYAngle - yAngle)/4;
+    hint(DISABLE_DEPTH_TEST);
+    pushMatrix();
+    translate(cameraX, cameraY, cameraZ);
+    rotateZ(-xAngle);
+    rotateX(yAngle);
+    translate(0, 500, 0);
+    rotateX(PI/2);
+    ellipse(0, 0, 20, 20);
+    popMatrix();
+    hint(ENABLE_DEPTH_TEST);
+    doneFrame = true;
 }
 
 void drawRevolver() {
     pushMatrix();
     translate(cameraX, cameraY, cameraZ);
     rotateZ(-xAngle);
-    //rotateX(yAngle/1.5);
-    translate(-width/20, 90, -height/24);
+    rotateX(yAngle);
+    translate(-width/200, 90, -height/24);
     rotateX(0.1 + PI/2);
-    //rotateZ(-PI/16);
+    rotateZ(-PI/16);
     rotateY(PI);
     scale(6);
     shape(revolver1);
