@@ -1,10 +1,10 @@
-abstract class GameObject {
+abstract class Model {
     PShape[] objModels = new PShape[10];
     PShape model;
     PVector position;
     float rotation;
     int scaleFactor;
-    GameObject() {
+    Model() {
         float xRange = gridLength * tileSize/2;
         float yRange = gridWidth * tileSize/2;
         int xCoor = int(random(xRange * -1, xRange + 1));

@@ -1,4 +1,4 @@
-class Tree extends GameObject{
+class Tree extends Model{
      
      Tree(){
          super();

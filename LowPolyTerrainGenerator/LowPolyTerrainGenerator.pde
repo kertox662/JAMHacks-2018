@@ -34,9 +34,11 @@ void setup() {
     catch (Exception e) {
     }
     fullScreen(P3D);
+    //size(800, 600, P3D);
+    //println(surface.getNative());
     for (int i = 0; i < gridLength; i++) {
         for (int j = 0; j < gridWidth; j++) {
-            heights[i][j] = random(-2, 2);
+            heights[i][j] = 1000 * noise(i/100.0, j/100.0);
         }
     }
 
@@ -53,12 +55,19 @@ void setup() {
     }
 }
 
-void mouseMoved(){
-    PVector moveAngle = PVector.fromAngle(atan2(pmouseY - mouseY, pmouseX - mouseX)).mult(0.02);
-    targetXAngle += moveAngle.x;
-    
-    targetYAngle += moveAngle.y;
-    targetYAngle = min(PI/2, max(-PI/2, targetYAngle));
+boolean doneFrame = true;
+void mouseMoved() {
+    if (!(mouseX == displayWidth/2 && mouseY == displayHeight/2)) {
+        while (true) {
+            if (doneFrame) {
+                break;
+            }
+        }
+        PVector moveAngle = PVector.fromAngle(atan2(pmouseY - mouseY, pmouseX - mouseX)).mult(0.05);
+        targetXAngle += moveAngle.x;
+        targetYAngle += moveAngle.y;
+        targetYAngle = min(PI/2, max(-PI/2, targetYAngle));
+    }
 }
 
 float targetXAngle = 0;
@@ -84,18 +93,30 @@ void loadGameShapes() {
 
 int cameraX = 0;
 int cameraY = 0;
-int cameraZ = 100;
-float directionAngle = PI/-2;
-boolean doneFrame = false;
+int cameraZ = 1000;
+int prevCameraZ = 0;
+int targetCameraZ;
 void draw() {
     robot.mouseMove(displayWidth/2, displayHeight/2);
     doneFrame = false;
     lights();
     keyRespond();
     background(82, 210, 255);
+    xAngle = xAngle + (targetXAngle - xAngle)/8;
+    yAngle = yAngle + (targetYAngle - yAngle)/8;
     drawTerrain();
-    drawRevolver();
-    camera(cameraX, cameraY, cameraZ, cameraX + sin(xAngle), cameraY + cos(xAngle), cameraZ + sin(yAngle), 0.0, 0.0, -1.0);
+    //camera(cameraX, cameraY, cameraZ, cameraX + sin(xAngle), cameraY + cos(xAngle), cameraZ + sin(yAngle), 0.0, 0.0, -1.0);
+    float zCoor = 0;
+    try {
+        zCoor = heights[int((cameraX + gridLength * tileSize/2)/tileSize - 1)][int((cameraY + gridWidth * tileSize/2)/tileSize - 1)];
+    }catch (ArrayIndexOutOfBoundsException e) {
+        zCoor = prevCameraZ;
+    }
+    targetCameraZ = 150 + int(zCoor);
+    cameraZ = cameraZ + (targetCameraZ - cameraZ)/3;
+    prevCameraZ = int(zCoor);
+    camera(cameraX, cameraY, cameraZ, cameraX + sin(xAngle), cameraY + cos(xAngle), cameraZ + sin(yAngle), sin(xAngle) * sin(yAngle), cos(xAngle) * sin(yAngle), -cos(yAngle));
+    println(sin(xAngle) * sin(yAngle), cos(xAngle) * sin(yAngle), -cos(yAngle));
     for (int i = 0; i < treeCount; i++) {
         Tree t = treeArray[i];
         t.drawTree();
@@ -104,13 +125,10 @@ void draw() {
         Grass g = grassArray[i];
         g.drawGrass();
     }
-    xAngle = xAngle + (targetXAngle - xAngle)/4;
-    yAngle = yAngle + (targetYAngle - yAngle)/4;
+    drawRevolver();
     hint(DISABLE_DEPTH_TEST);
     pushMatrix();
-    translate(cameraX, cameraY, cameraZ);
-    rotateZ(-xAngle);
-    rotateX(yAngle);
+    translateToCharacter();
     translate(0, 500, 0);
     rotateX(PI/2);
     ellipse(0, 0, 20, 20);
@@ -119,16 +137,26 @@ void draw() {
     doneFrame = true;
 }
 
-void drawRevolver() {
-    pushMatrix();
+void translateToCharacter() {
     translate(cameraX, cameraY, cameraZ);
     rotateZ(-xAngle);
     rotateX(yAngle);
-    translate(-width/200, 90, -height/24);
+}
+
+void mousePressed(){
+    revolverY = 80;
+}
+
+float revolverY = 120;
+void drawRevolver() {
+    revolverY = revolverY + (120 - revolverY)/2;
+    pushMatrix();
+    translateToCharacter();
+    translate(-width/50, revolverY, -height/24);
     rotateX(0.1 + PI/2);
-    rotateZ(-PI/16);
+    rotateZ(PI/16);
     rotateY(PI);
-    scale(6);
+    scale(10);
     shape(revolver1);
     popMatrix();
 }
