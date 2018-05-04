@@ -26,13 +26,13 @@ Robot robot;
 
 void setup() {
     noCursor();
-    frameRate(120);
+    frameRate(1000);
     try {
         robot = new Robot();
     }
     catch (Exception e) {
     }
-    fullScreen(P3D);
+    fullScreen(P3D, 2);
     //size(800, 600, P3D);
     //println(surface.getNative());
     for (int i = 0; i < gridLength; i++) {
@@ -42,17 +42,17 @@ void setup() {
     }
 
     loadGameShapes();
-	generateEnvironment();
+    generateEnvironment();
 }
 
-void generateEnvironment(){
-	int index = 0;
-	for (int i = 0; i < treeCount; i++) {
+void generateEnvironment() {
+    int index = 0;
+    for (int i = 0; i < treeCount; i++) {
         models[index] = new Tree();
         index++;
     }
-    
-	for (int i = 0; i < grassCount; i++) {
+
+    for (int i = 0; i < grassCount; i++) {
         models[index] = new Grass();
         index++;
     }
@@ -112,7 +112,8 @@ void draw() {
     float zCoor = 0;
     try {
         zCoor = heights[int((cameraX + gridLength * tileSize/2)/tileSize - 1)][int((cameraY + gridWidth * tileSize/2)/tileSize - 1)];
-    }catch (ArrayIndexOutOfBoundsException e) {
+    }
+    catch (ArrayIndexOutOfBoundsException e) {
         zCoor = prevCameraZ;
     }
     targetCameraZ = 150 + int(zCoor);
@@ -124,6 +125,8 @@ void draw() {
         models[i].drawModel();
     }
     drawRevolver();
+
+    noLights();
     hint(DISABLE_DEPTH_TEST);
     pushMatrix();
     translateToCharacter();
@@ -141,7 +144,7 @@ void translateToCharacter() {
     rotateX(yAngle);
 }
 
-void mousePressed(){
+void mousePressed() {
     revolverY = 80;
 }
 
