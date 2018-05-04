@@ -100,6 +100,7 @@ int cameraZ = 1000;
 int prevCameraZ = 0;
 int targetCameraZ;
 void draw() {
+    //println(xAngle + " xAngle");
     robot.mouseMove(displayWidth/2, displayHeight/2);
     doneFrame = false;
     lights();
@@ -169,7 +170,7 @@ void drawTerrain() {
         //beginShape(TRIANGLE_STRIP);
         for (int j = 0; j < gridLength - 1; j++) {
 
-            if (dist(tileSize * (i + 0.5 - gridLength/2), tileSize * (j - gridWidth/2), cameraX, cameraY) < 700) {
+            if (dist(tileSize * (i + 0.5 - gridLength/2), tileSize * (j - gridWidth/2), cameraX, cameraY) < 725) {
                 if (true) {//PVector.angleBetween(new PVector(-sqrt(3), -1), new PVector(1, -sqrt(3)))){
                     pushMatrix();
                     translate(tileSize * (i + 0.5 - gridLength/2), tileSize * (j - gridWidth/2), 0);
