@@ -2,7 +2,7 @@ abstract class Model {
     PShape[] objModels = new PShape[10];
     PShape model;
     PVector position;
-    float rotation;
+    float xAngle;
     int scaleFactor;
     Model() {
         float xRange = gridLength * tileSize/2;
@@ -11,7 +11,7 @@ abstract class Model {
         int yCoor = int(random(yRange * -1, yRange + 1));
         float zCoor = heights[int((xCoor + xRange)/tileSize - 1)][int((yCoor + yRange)/tileSize - 1)];
         position = new PVector(xCoor, yCoor, zCoor);
-        rotation = random(0, 2*PI);
+        xAngle = random(0, 2*PI);
         scaleFactor = int(random(100, 101));
     }
     
@@ -25,7 +25,7 @@ abstract class Model {
             translate(position.x, position.y, position.z);
             scale(scaleFactor);
             rotateX(PI/2);
-            rotateY(rotation);
+            rotateY(xAngle);
             shape(model);
             popMatrix();
         }

@@ -6,11 +6,10 @@ int tileSize = 20;
 float[][] heights = new float[gridLength][gridWidth];
 float moveSpeed = 5;
 
-Tree[] treeArray;
 int treeCount = 30;
-
-Grass[] grassArray;
 int grassCount = 100;
+
+Model[] models = new Model[treeCount + grassCount];
 
 PShape revolver1;
 PShape tree1;
@@ -43,15 +42,19 @@ void setup() {
     }
 
     loadGameShapes();
+	generateEnvironment();
+}
 
-    treeArray = new Tree[treeCount];
-    for (int i = 0; i < treeCount; i++) {
-        treeArray[i] = new Tree();
+void generateEnvironment(){
+	int index = 0;
+	for (int i = 0; i < treeCount; i++) {
+        models[index] = new Tree();
+        index++;
     }
-
-    grassArray = new Grass[grassCount];
-    for (int i = 0; i < grassCount; i++) {
-        grassArray[i] = new Grass();
+    
+	for (int i = 0; i < grassCount; i++) {
+        models[index] = new Grass();
+        index++;
     }
 }
 
@@ -117,13 +120,8 @@ void draw() {
     prevCameraZ = int(zCoor);
     camera(cameraX, cameraY, cameraZ, cameraX + sin(xAngle), cameraY + cos(xAngle), cameraZ + sin(yAngle), sin(xAngle) * sin(yAngle), cos(xAngle) * sin(yAngle), -cos(yAngle));
     println(sin(xAngle) * sin(yAngle), cos(xAngle) * sin(yAngle), -cos(yAngle));
-    for (int i = 0; i < treeCount; i++) {
-        Tree t = treeArray[i];
-        t.drawTree();
-    }
-    for (int i = 0; i < grassCount; i++) {
-        Grass g = grassArray[i];
-        g.drawGrass();
+    for (int i = 0; i < models.length; i++) {
+        models[i].drawModel();
     }
     drawRevolver();
     hint(DISABLE_DEPTH_TEST);
