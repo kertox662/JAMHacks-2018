@@ -111,12 +111,8 @@ int prevCameraZ = 0;
 int cameraFloor;
 float upVelocity = 0;
 void draw() {
-<<<<<<< HEAD
-    robot.mouseMove(displayWidth/2, displayHeight/2); //Remeber to uncomment out
-=======
     //println(xAngle + " xAngle");
     robot.mouseMove(displayWidth/2, displayHeight/2);
->>>>>>> 9af45c7d90ea95a3f60af59f54638c2707536512
     doneFrame = false;
     lights();
     keyRespond();
