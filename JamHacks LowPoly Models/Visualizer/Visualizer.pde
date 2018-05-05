@@ -8,17 +8,19 @@ float rate = -600.0;
 void setup() {
     frameRate(500);
     size(800, 600, P3D);
-    s = loadShape("LPSnowPine.obj");
+    s = loadShape("Bullet1Projectile.obj");
     s.scale(-50);
 }
 
 void draw() {
+    pushMatrix();
     background(255);
     translate(width/2, 3 * height/5, 0);
-    //rotateX(PI);
+    //rotateX(PI/2);
     rotateY(-PI/2 + frameCount/rate);
     //rotateZ(PI/4);
     shape(s);
+    popMatrix();
 }
 
 void keyPressed() {

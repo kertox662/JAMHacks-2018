@@ -6,11 +6,10 @@ int tileSize = 20;
 float[][] heights = new float[gridLength][gridWidth];
 float moveSpeed = 5;
 
-Tree[] treeArray;
 int treeCount = 30;
-
-Grass[] grassArray;
 int grassCount = 100;
+
+Model[] models = new Model[treeCount + grassCount];
 
 PShape revolver1;
 PShape tree1;
@@ -27,13 +26,13 @@ Robot robot;
 
 void setup() {
     noCursor();
-    frameRate(120);
+    frameRate(1000);
     try {
         robot = new Robot();
     }
     catch (Exception e) {
     }
-    fullScreen(P3D);
+    fullScreen(P3D, 2);
     //size(800, 600, P3D);
     //println(surface.getNative());
     for (int i = 0; i < gridLength; i++) {
@@ -43,15 +42,19 @@ void setup() {
     }
 
     loadGameShapes();
+    generateEnvironment();
+}
 
-    treeArray = new Tree[treeCount];
+void generateEnvironment() {
+    int index = 0;
     for (int i = 0; i < treeCount; i++) {
-        treeArray[i] = new Tree();
+        models[index] = new Tree();
+        index++;
     }
 
-    grassArray = new Grass[grassCount];
     for (int i = 0; i < grassCount; i++) {
-        grassArray[i] = new Grass();
+        models[index] = new Grass();
+        index++;
     }
 }
 
@@ -97,6 +100,7 @@ int cameraZ = 1000;
 int prevCameraZ = 0;
 int targetCameraZ;
 void draw() {
+    //println(xAngle + " xAngle");
     robot.mouseMove(displayWidth/2, displayHeight/2);
     doneFrame = false;
     lights();
@@ -109,7 +113,8 @@ void draw() {
     float zCoor = 0;
     try {
         zCoor = heights[int((cameraX + gridLength * tileSize/2)/tileSize - 1)][int((cameraY + gridWidth * tileSize/2)/tileSize - 1)];
-    }catch (ArrayIndexOutOfBoundsException e) {
+    }
+    catch (ArrayIndexOutOfBoundsException e) {
         zCoor = prevCameraZ;
     }
     targetCameraZ = 150 + int(zCoor);
@@ -117,15 +122,12 @@ void draw() {
     prevCameraZ = int(zCoor);
     camera(cameraX, cameraY, cameraZ, cameraX + sin(xAngle), cameraY + cos(xAngle), cameraZ + sin(yAngle), sin(xAngle) * sin(yAngle), cos(xAngle) * sin(yAngle), -cos(yAngle));
     println(sin(xAngle) * sin(yAngle), cos(xAngle) * sin(yAngle), -cos(yAngle));
-    for (int i = 0; i < treeCount; i++) {
-        Tree t = treeArray[i];
-        t.drawTree();
-    }
-    for (int i = 0; i < grassCount; i++) {
-        Grass g = grassArray[i];
-        g.drawGrass();
+    for (int i = 0; i < models.length; i++) {
+        models[i].drawModel();
     }
     drawRevolver();
+
+    noLights();
     hint(DISABLE_DEPTH_TEST);
     pushMatrix();
     translateToCharacter();
@@ -143,7 +145,7 @@ void translateToCharacter() {
     rotateX(yAngle);
 }
 
-void mousePressed(){
+void mousePressed() {
     revolverY = 80;
 }
 
@@ -168,7 +170,7 @@ void drawTerrain() {
         //beginShape(TRIANGLE_STRIP);
         for (int j = 0; j < gridLength - 1; j++) {
 
-            if (dist(tileSize * (i + 0.5 - gridLength/2), tileSize * (j - gridWidth/2), cameraX, cameraY) < 700) {
+            if (dist(tileSize * (i + 0.5 - gridLength/2), tileSize * (j - gridWidth/2), cameraX, cameraY) < 725) {
                 if (true) {//PVector.angleBetween(new PVector(-sqrt(3), -1), new PVector(1, -sqrt(3)))){
                     pushMatrix();
                     translate(tileSize * (i + 0.5 - gridLength/2), tileSize * (j - gridWidth/2), 0);
