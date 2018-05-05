@@ -4,14 +4,15 @@ import shapes3d.*;
 PApplet applet = this;
 
 void setup(){
-    noCursor();
+    setRobot();
     fullScreen(P3D);
     frameRate(1000);
     loadTerrain();
 }
 
 void draw(){
-    background();
+    background(0);
+    setCursorToCenter();
     updateCamera();
     drawTerrain();
 }
