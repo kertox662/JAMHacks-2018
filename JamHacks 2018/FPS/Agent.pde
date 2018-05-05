@@ -11,6 +11,9 @@ abstract class Agent {
         xAngle = xA;
         yAngle = yA;
     }
+    
+    void update(){
+    }
 
     void display() {
     }

@@ -65,11 +65,11 @@ void generateEnvironment() {
 boolean doneFrame = true;
 void mouseMoved() {
     if (!(mouseX == displayWidth/2 && mouseY == displayHeight/2)) {
-        while (true) {
-            if (doneFrame) {
-                break;
-            }
-        }
+        //while (true) {
+        //    if (doneFrame) {
+        //        break;
+        //    }
+        //}
         PVector moveAngle = PVector.fromAngle(atan2(pmouseY - mouseY, pmouseX - mouseX)).mult(0.05);
         targetXAngle += moveAngle.x;
         targetYAngle += moveAngle.y;
