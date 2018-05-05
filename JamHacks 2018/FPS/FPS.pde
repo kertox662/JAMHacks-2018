@@ -6,7 +6,9 @@ import shapes3d.*;
 PApplet applet = this;
 Environment[] environment = {};
 
-void setup(){
+boolean doneFrame = false;
+
+void setup() {
     setRobot();
     fullScreen(P3D);
     frameRate(1000);
@@ -14,17 +16,27 @@ void setup(){
     loadModels();
 }
 
-void draw(){
+void draw() {
+    doneFrame = false;
+
     //Background and Cursor.
     background(0);
     setCursorToCenter();
-    
+
     updateCamera();
-    
+
     //3D stuff.
     drawTerrain();
     drawEnvironment();
-    
+
     //2D stuff.
-    
+    doneFrame = true;
+}
+
+void waitForFrameFinish() {
+    while (true) {
+        if (doneFrame) {
+            break;
+        }
+    }
 }
