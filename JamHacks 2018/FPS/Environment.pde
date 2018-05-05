@@ -1,6 +1,6 @@
 class Environment extends Agent {
     Environment(float xPos, float yPos, float zPos, float xA, float yA) {
-        super(xPos, yPos, zPos, xA, yA);
+        super(xPos, yPos, zPos, xA, yA, 0);
     }
 }
 

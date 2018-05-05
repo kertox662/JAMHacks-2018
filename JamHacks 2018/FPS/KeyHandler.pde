@@ -31,3 +31,24 @@ void keyReleased() {
         spacePressed = false;
     }
 }
+
+void keyRespond(){
+    if (wPressed) {
+        mainPlayer.position.x += mainPlayer.speed / (frameRate/60) * sin(mainPlayer.xAngle);
+        mainPlayer.position.y += mainPlayer.speed / (frameRate/60) * cos(mainPlayer.xAngle);
+    }
+    if (aPressed) {
+        mainPlayer.position.x -= mainPlayer.speed / (frameRate/60) * sin(mainPlayer.xAngle - PI/2);
+        mainPlayer.position.y -= mainPlayer.speed / (frameRate/60) * cos(mainPlayer.xAngle - PI/2);
+    }
+    if (sPressed) {
+        mainPlayer.position.x -= mainPlayer.speed / (frameRate/60) * sin(mainPlayer.xAngle);
+        mainPlayer.position.y -= mainPlayer.speed / (frameRate/60) * cos(mainPlayer.xAngle);
+    }
+    if (dPressed) {
+        mainPlayer.position.x -= mainPlayer.speed / (frameRate/60) * sin(PI/2 + mainPlayer.xAngle);
+        mainPlayer.position.y -= mainPlayer.speed / (frameRate/60) * cos(PI/2 + mainPlayer.xAngle);
+    }
+    if (spacePressed) {
+    }
+}

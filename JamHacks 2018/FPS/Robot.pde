@@ -1,23 +1,23 @@
 Robot robot;
-int displayMiddleX = displayWidth/2;
-int displayMiddleY = displayHeight/2;
+float displayMiddleX;
+float displayMiddleY;
 
 void setRobot() {
-    println(mouseX, mouseY, displayMiddleX, displayMiddleY, displayWidth, displayHeight);
     noCursor();
+    calculateDisplayCenter();
     try {
-        robot = new Robot(MouseInfo.getPointerInfo().getDevice());
+        robot = new Robot();
     }
     catch(Exception e) {
         e.printStackTrace();
     }
 }
 
-void recalculateDisplayCenter() {
-    displayMiddleX = displayWidth/2;
-    displayMiddleY = displayHeight/2;
+void calculateDisplayCenter() {
+    displayMiddleX = displayWidth/2.0;
+    displayMiddleY = displayHeight/2.0;
 }
 
 void setCursorToCenter() {
-    robot.mouseMove(displayMiddleX, displayMiddleY);
+    robot.mouseMove(int(displayMiddleX), int(displayMiddleY));
 }

@@ -1,5 +1,5 @@
 void updateCamera() {
-    camera( player.position.x, player.position.y, player.position.z, 
-        player.position.x + sin(player.xAngle), player.position.y + cos(player.xAngle), player.position.z + sin(player.yAngle), 
-        0, 1, 0);
+    camera( mainPlayer.position.x, mainPlayer.position.y, mainPlayer.position.z, 
+        mainPlayer.position.x + sin(mainPlayer.xAngle), mainPlayer.position.y + cos(mainPlayer.xAngle), mainPlayer.position.z + sin(mainPlayer.yAngle), 
+        0, 0, -1);
 }
