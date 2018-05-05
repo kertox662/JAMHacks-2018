@@ -2,6 +2,7 @@ boolean leftPressed = false;
 boolean rightPressed = false;
 boolean upPressed = false;
 boolean downPressed = false;
+boolean spacePressed = false;
 
 void keyPressed() {
     if (key == 'a') {
@@ -12,6 +13,8 @@ void keyPressed() {
         upPressed = true;
     } else if (key == 's') {
         downPressed = true;
+    } else if (key == ' ') {
+        spacePressed = true;
     }
 }
 
@@ -24,6 +27,8 @@ void keyReleased() {
         upPressed = false;
     } else if (key == 's') {
         downPressed = false;
+    } else if (key == ' ') {
+        spacePressed = false;
     }
 }
 
@@ -44,4 +49,10 @@ void keyRespond() {
         cameraX -= moveSpeed / (frameRate/60) * sin(xAngle);
         cameraY -= moveSpeed / (frameRate/60) * cos(xAngle);
     } //<>//
+    if(spacePressed){
+        if(onGround){
+            upVelocity = 10;
+            onGround = false;
+        }
+    }
 }

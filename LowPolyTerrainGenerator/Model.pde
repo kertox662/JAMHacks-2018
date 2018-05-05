@@ -1,10 +1,15 @@
+Model[] models = {};
 abstract class Model {
+    Box[] hitboxes = {};
+    boolean destroyed = false;
     PShape[] objModels = new PShape[10];
     PShape model;
     PVector position;
     float xAngle;
     int scaleFactor;
+    int id;
     Model() {
+        id = models.length;
         float xRange = gridLength * tileSize/2;
         float yRange = gridWidth * tileSize/2;
         int xCoor = int(random(xRange * -1, xRange + 1));
@@ -15,17 +20,26 @@ abstract class Model {
         scaleFactor = int(random(100, 101));
     }
     
+    void addHitbox(Box hitbox){
+        hitboxes = (Box[]) append(hitboxes, hitbox);
+    }
+    
     void loadModel(){
         model = objModels[int(random(0, objModels.length))];
     }
     
+    void createHitboxes(){}
+    
     void drawModel() {
-        if (dist(position.x, position.y, cameraX, cameraY) < 700) {
+        if (dist(position.x, position.y, cameraX, cameraY) < 700 && !destroyed) {
             pushMatrix();
             translate(position.x, position.y, position.z);
-            scale(scaleFactor);
             rotateX(PI/2);
             rotateY(xAngle);
+            for(int i = 0; i < hitboxes.length; i++){
+                hitboxes[i].draw();
+            }
+            scale(scaleFactor);
             shape(model);
             popMatrix();
         }

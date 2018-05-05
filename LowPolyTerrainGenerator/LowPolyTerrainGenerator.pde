@@ -1,4 +1,9 @@
 import java.awt.Robot;
+import javafx.stage.Screen;
+import picking.*;
+import shapes3d.*;
+
+PApplet app = this;
 
 int gridLength = 100;
 int gridWidth = 100;
@@ -7,10 +12,13 @@ float[][] heights = new float[gridLength][gridWidth];
 float moveSpeed = 5;
 
 int treeCount = 30;
-int grassCount = 100;
+int grassCount = 0;
 
-Model[] models = new Model[treeCount + grassCount];
-
+PImage target0;
+PImage target1;
+PImage target2;
+PImage target3;
+PImage target4;
 PShape revolver1;
 PShape tree1;
 PShape tree2;
@@ -34,7 +42,7 @@ void setup() {
     }
     fullScreen(P3D, 2);
     //size(800, 600, P3D);
-    //println(surface.getNative());
+    //println(surface);
     for (int i = 0; i < gridLength; i++) {
         for (int j = 0; j < gridWidth; j++) {
             heights[i][j] = 1000 * noise(i/100.0, j/100.0);
@@ -46,15 +54,11 @@ void setup() {
 }
 
 void generateEnvironment() {
-    int index = 0;
     for (int i = 0; i < treeCount; i++) {
-        models[index] = new Tree();
-        index++;
+        models = (Model[]) append(models, new Tree());
     }
-
     for (int i = 0; i < grassCount; i++) {
-        models[index] = new Grass();
-        index++;
+        models = (Model[]) append(models, new Grass());
     }
 }
 
@@ -81,6 +85,11 @@ float xAngle = 0;
 float yAngle = 0;
 
 void loadGameShapes() {
+    target0 = loadImage("PointerIcons/target0.png");
+    target1 = loadImage("PointerIcons/target1.png");
+    target2 = loadImage("PointerIcons/target2.png");
+    target3 = loadImage("PointerIcons/target3.png");
+    target4 = loadImage("PointerIcons/target4.png");
     revolver1 = loadShape("Sig2.obj");
     tree1 = loadShape("Trees/Tree1/LPTree1.obj");
     tree2 = loadShape("Trees/Tree2/LPTree2.obj");
@@ -94,48 +103,47 @@ void loadGameShapes() {
     dryGrass4 = loadShape("Grass/DryGrass4/LPDryGrass4.obj");
 }
 
+boolean onGround = true;
 int cameraX = 0;
 int cameraY = 0;
 int cameraZ = 1000;
 int prevCameraZ = 0;
-int targetCameraZ;
+int cameraFloor;
+float upVelocity = 0;
 void draw() {
-    robot.mouseMove(displayWidth/2, displayHeight/2);
+    robot.mouseMove(displayWidth/2, displayHeight/2); //Remeber to uncomment out
     doneFrame = false;
     lights();
     keyRespond();
     background(82, 210, 255);
     xAngle = xAngle + (targetXAngle - xAngle)/8;
     yAngle = yAngle + (targetYAngle - yAngle)/8;
-    drawTerrain();
     //camera(cameraX, cameraY, cameraZ, cameraX + sin(xAngle), cameraY + cos(xAngle), cameraZ + sin(yAngle), 0.0, 0.0, -1.0);
     float zCoor = 0;
     try {
         zCoor = heights[int((cameraX + gridLength * tileSize/2)/tileSize - 1)][int((cameraY + gridWidth * tileSize/2)/tileSize - 1)];
+        if (abs(cameraZ - 150 - zCoor) <= 10) {
+            onGround = true;
+        }
     }
     catch (ArrayIndexOutOfBoundsException e) {
         zCoor = prevCameraZ;
+        onGround = false;
     }
-    targetCameraZ = 150 + int(zCoor);
-    cameraZ = cameraZ + (targetCameraZ - cameraZ)/3;
+    cameraFloor = 150 + int(zCoor);
+    cameraZ = int(cameraZ + (cameraFloor - cameraZ)/6);
+    cameraZ += upVelocity / (frameRate/60);
     prevCameraZ = int(zCoor);
+    upVelocity = onGround? 0:(upVelocity - 0.8);
     camera(cameraX, cameraY, cameraZ, cameraX + sin(xAngle), cameraY + cos(xAngle), cameraZ + sin(yAngle), sin(xAngle) * sin(yAngle), cos(xAngle) * sin(yAngle), -cos(yAngle));
-    println(sin(xAngle) * sin(yAngle), cos(xAngle) * sin(yAngle), -cos(yAngle));
+    drawTerrain();
     for (int i = 0; i < models.length; i++) {
         models[i].drawModel();
     }
     drawRevolver();
-
-    noLights();
-    hint(DISABLE_DEPTH_TEST);
-    pushMatrix();
-    translateToCharacter();
-    translate(0, 500, 0);
-    rotateX(PI/2);
-    ellipse(0, 0, 20, 20);
-    popMatrix();
-    hint(ENABLE_DEPTH_TEST);
+    drawPointer();
     doneFrame = true;
+    println("*****");
 }
 
 void translateToCharacter() {
@@ -146,6 +154,26 @@ void translateToCharacter() {
 
 void mousePressed() {
     revolverY = 80;
+    Shape3D picked = Shape3D.pickShape(this, mouseX, mouseY);
+    if (picked != null && int(picked.tag) > -1) {
+        println(picked);
+        try{
+            models[int(picked.tag)].destroyed = true;
+        }catch(Exception e){}
+    }
+}
+
+void drawPointer(){
+    noLights();
+    hint(DISABLE_DEPTH_TEST);
+    pushMatrix();
+    translateToCharacter();
+    translate(0, 500, 0);
+    rotateX(PI/2);
+    rotateZ(PI);
+    image(target1, -16, -16);
+    popMatrix();
+    hint(ENABLE_DEPTH_TEST);
 }
 
 float revolverY = 120;
@@ -165,6 +193,8 @@ void drawRevolver() {
 
 void drawTerrain() {
     fill(144, 245, 0);
+    stroke(0);
+    strokeWeight(1);
     for (int i = 0; i < gridWidth - 1; i++) {
         //beginShape(TRIANGLE_STRIP);
         for (int j = 0; j < gridLength - 1; j++) {
