@@ -31,11 +31,7 @@ abstract class Model {
     void createHitboxes(){}
     
     void drawModel() {
-<<<<<<< HEAD
-        if (dist(position.x, position.y, cameraX, cameraY) < 700 && !destroyed) {
-=======
-        if (dist(position.x, position.y, cameraX, cameraY) < 700 && isInFront()) {
->>>>>>> 9af45c7d90ea95a3f60af59f54638c2707536512
+        if (dist(position.x, position.y, cameraX, cameraY) < 700 && !destroyed && isInFront()) {
             pushMatrix();
             translate(position.x, position.y, position.z);
             rotateX(PI/2);
@@ -58,20 +54,6 @@ abstract class Model {
         println(angleBetween + " ANGLE True");
         return true;
     }
-    //if (viewMinA < 0) {
-    //  viewMinA = TWO_PI + viewMinA;
-    //}
-    //float relativeX = position.x - cameraX;
-    //float relativeY = position.z - cameraY;
-    //float relativeA = tan(relativeY / relativeX) + TWO_PI - viewMinA;
-    //if (relativeA < 0) {
-    //  relativeA = relativeA % TWO_PI + TWO_PI + relativeA;
-    //}
-    //if (relativeA <= PI) {
-    //  //println(relativeA + " Visible True");
-    //  return true;
-    //}
-    ////println(relativeA + "Visible False");
     println(angleBetween + " ANGLE False");
     return false;
   }
