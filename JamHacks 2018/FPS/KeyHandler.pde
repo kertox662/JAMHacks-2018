@@ -1,18 +1,18 @@
-boolean leftPressed = false;
-boolean rightPressed = false;
-boolean upPressed = false;
-boolean downPressed = false;
+boolean aPressed = false;
+boolean dPressed = false;
+boolean wPressed = false;
+boolean sPressed = false;
 boolean spacePressed = false;
 
 void keyPressed() {
     if (key == 'a') {
-        leftPressed = true;
+        aPressed = true;
     } else if (key == 'd') {
-        rightPressed = true;
+        dPressed = true;
     } else if (key == 'w') {
-        upPressed = true;
+        wPressed = true;
     } else if (key == 's') {
-        downPressed = true;
+        sPressed = true;
     } else if (key == ' ') {
         spacePressed = true;
     }
@@ -20,13 +20,13 @@ void keyPressed() {
 
 void keyReleased() {
     if (key == 'a') {
-        leftPressed = false;
+        aPressed = false;
     } else if (key == 'd') {
-        rightPressed = false;
+        dPressed = false;
     } else if (key == 'w') {
-        upPressed = false;
+        wPressed = false;
     } else if (key == 's') {
-        downPressed = false;
+        sPressed = false;
     } else if (key == ' ') {
         spacePressed = false;
     }
