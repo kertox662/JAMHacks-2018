@@ -18,9 +18,8 @@ void setup() {
 
 void draw() {
     doneFrame = false;
-
     //Background and Cursor.
-    background(0);
+    background(82, 210, 255);
     setCursorToCenter();
     
     keyRespond();

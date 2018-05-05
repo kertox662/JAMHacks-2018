@@ -6,12 +6,13 @@ float[][] terrain = new float[terrainLength][terrainWidth];
 void loadTerrain() {
     for (int i = 0; i < terrainLength; i++) {
         for (int j = 0; j < terrainLength; j++) {
-            terrain[i][j] = -1000 + 1000.0 * noise(i/10.0, j/10.0);
+            terrain[i][j] = -1000 + 1000.0 * noise(i/15.0, j/15.0);
         }
     }
 }
 
 void drawTerrain() {
+    fill(144, 245, 0);
     for (int y = 0; y < terrainLength-1; y++) {
         beginShape(TRIANGLE_STRIP);
         for (int x = 0; x < terrainWidth; x++) {
