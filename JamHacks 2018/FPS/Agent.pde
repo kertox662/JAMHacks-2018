@@ -1,3 +1,5 @@
+PShape testShape;
+
 abstract class Agent{
     PVector position;
     float xAngle;
@@ -9,4 +11,11 @@ abstract class Agent{
         xAngle = xA;
         yAngle = yA;
     }
+    
+    void display(){
+    }
+}
+
+void loadModels(){
+
 }
