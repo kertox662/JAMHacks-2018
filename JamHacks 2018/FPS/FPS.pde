@@ -22,7 +22,8 @@ void draw() {
     //Background and Cursor.
     background(0);
     setCursorToCenter();
-
+    
+    keyRespond();
     updateCamera();
 
     //3D stuff.
