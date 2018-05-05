@@ -1,6 +1,4 @@
-//This is the player. Data about the player is stored here.
-float PLAYER_HEIGHT = 150;
-
+//This is a player. Data about the player is stored here.
 abstract class Player extends Agent {
     float speed;
     Player(float xPos, float yPos, float zPos, float xA, float speed) {

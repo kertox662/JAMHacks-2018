@@ -1,3 +1,4 @@
+float PLAYER_HEIGHT = 150;
 Agent mainPlayer = new MainPlayer(0, 0, PLAYER_HEIGHT, 0, 5);
 
 class MainPlayer extends Player{
