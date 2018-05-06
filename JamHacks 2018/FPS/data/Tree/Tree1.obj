@@ -1,6 +1,6 @@
 # Blender v2.79 (sub 0) OBJ File: 'Low Poly Scene.blend'
 # www.blender.org
-mtllib LPTree1.mtl
+mtllib Tree1.mtl
 o Tree_Variant_1.001_Cylinder.006
 v -0.000000 0.000000 -0.123329
 v 0.004188 0.901515 -0.103115
