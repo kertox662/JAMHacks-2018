@@ -8,8 +8,9 @@ class MainPlayer extends Player{
 }
 
 void updateCamera() {
-    camera( mainPlayer.position.x, mainPlayer.position.y, mainPlayer.position.z, 
-        mainPlayer.position.x + sin(mainPlayer.xAngle), mainPlayer.position.y + cos(mainPlayer.xAngle), mainPlayer.position.z + sin(mainPlayer.yAngle), 
+    println();
+    camera( mainPlayer.position.x, mainPlayer.position.y, getHeight(mainPlayer.position.x, mainPlayer.position.y) + 350,//mainPlayer.position.z, 
+        mainPlayer.position.x + sin(mainPlayer.xAngle), mainPlayer.position.y + cos(mainPlayer.xAngle), getHeight(mainPlayer.position.x, mainPlayer.position.y) + 350 + sin(mainPlayer.yAngle), 
         0, 0, -1);
 }
 
