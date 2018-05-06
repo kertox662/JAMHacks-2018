@@ -1,4 +1,5 @@
-PShape bush;
+
+
 
 abstract class Agent {
     PVector position;
@@ -27,4 +28,5 @@ abstract class Agent {
 
 void loadModels() {
     bush = loadShape("Bush/Bush.obj");
+    grass = loadShape("DryGrass2/LPDryGrass2.obj");
 }
