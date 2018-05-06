@@ -34,6 +34,9 @@ void updatePlayerData() {
             playerData[i].xAngle = float(getMessage());
             playerData[i].yAngle = float(getMessage());
             println(playerData[i]);
+            if(i != clientID){
+                playerData[i].display();
+            }
         }
     }
 }
