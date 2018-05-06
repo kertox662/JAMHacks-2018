@@ -9,9 +9,11 @@ String[] clientsConnected;
 String treeData; 
 String bushData;
 
+float scale = 120;
 int terrainLength = 100;
 int terrainWidth = 100;
 float[][] terrain = new float[terrainLength][terrainWidth];
+String terrainString;
 
 String testString = "Hello there ";
 
@@ -20,11 +22,15 @@ void setup() {
     playerData = new float[10][5];
     clientsConnected = new String[10];
     loadTerrain();
+    terrainString = dataToString(terrain);
+    println(terrainString.length());
+    //println(terrainString);
     treeData = generateObjects(5);
     bushData = generateObjects(5);
 }
 
 void draw() {
+    
 }
 
 void addPlayer(Client c) {
@@ -68,10 +74,10 @@ String generateObjects(int numOBJ){
 String dataToString(float[][] data){
     String dataString;
     String[] dataStringList = new String[data.length];
-    String[][] twodStringList = new String[data.length][5];
+    String[][] twodStringList = new String[data.length][data[0].length];
     
     for(int i = 0; i < data.length; i++){
-        for(int j = 0; j < 5; j++){
+        for(int j = 0; j < data[i].length; j++){
             twodStringList[i][j] = str(data[i][j]);
         }
         dataStringList[i] = join(twodStringList[i], ",");
@@ -83,12 +89,27 @@ String dataToString(float[][] data){
 
 void loadTerrain() {
     for (int i = 0; i < terrainLength; i++) {
-        for (int j = 0; j < terrainLength; j++) {
+        for (int j = 0; j < terrainWidth; j++) {
             terrain[i][j] = -1000 + 1000.0 * noise(i/10.0, j/10.0);
         }
     }
+    
+    
 }
 
 void serverEvent(Server server, Client client) {
-    server.write(testString + client.ip());
+    //server.write("Scale");
+    send(server, str(scale));
+    send(server, str(terrainLength));
+    send(server, str(terrainWidth));
+    for(int i = 0; i < terrainLength; i++){
+        for(int j = 0; j < terrainWidth; j++){
+            send(server, str(terrain[i][j]));
+        }
+    }
+    //server.write(terrainString);
+}
+
+void send(Server server, String input){
+    server.write(input + "\n");
 }
