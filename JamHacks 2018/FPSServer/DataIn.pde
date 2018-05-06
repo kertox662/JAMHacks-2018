@@ -1,5 +1,5 @@
 void draw() {
-    drawGUI();
+    background(255);
     Client c = s.available();
     if (c != null) {
         float[][] info = decode(c.readString());
@@ -21,8 +21,9 @@ void draw() {
         }
     }
     String dataString = dataToString(playerData);
-    //println(dataString);
+    
     send(s, dataString);
+    send(s, "\n*");
 }
 
 float[][] decode(String data) {

@@ -1,5 +1,5 @@
 void send(Server server, String input){
-
+    drawGUI(split(input, "\n"), 200);
     server.write(input + "\n");
 }
 

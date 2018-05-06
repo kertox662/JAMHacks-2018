@@ -7,20 +7,21 @@ int id;
 void serverEvent(Server server, Client client) {
     addPlayer();
     send(server, str(id));
+    
     send(server, str(scale));
     send(server, str(terrainLength));
     send(server, str(terrainWidth));
-    server.write(terrainString);
+    send(server, terrainString);
 
     send(server, "");
     send(server,str(numTrees));
-    server.write(treeData);
+    send(server, treeData);
     send(server, "");
     send(server, str(numBushes));
-    server.write(bushData);
+    send(server, bushData);
     send(server, "");
     send(server, str(numGrass));
-    server.write(grassData);
+    send(server, grassData);
 }
 
 
@@ -35,7 +36,7 @@ void addPlayer() {
             }
         }
         if (empty){
-            playerData[i] = new float[]{terrainLength/2 * scale, terrainWidth/2 * scale, terrain[terrainLength/2][terrainWidth/2], 0, 0};
+            playerData[i] = new float[]{100, 100, 150, 0, 0};
             id = i;
             println(id);
             numPlayers++;
