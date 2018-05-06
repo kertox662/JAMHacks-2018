@@ -23,7 +23,7 @@ void draw() {
     String dataString = dataToString(playerData);
     
     send(s, dataString);
-    send(s, "\n*");
+    send(s, "*");
 }
 
 float[][] decode(String data) {

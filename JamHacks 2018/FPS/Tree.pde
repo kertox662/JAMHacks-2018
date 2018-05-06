@@ -9,7 +9,7 @@ class Tree extends Environment{
 
 void loadTrees(){
     for (int i = 0; i < numTreeModels; i++) {
-        treeModels[0] = loadShape("Tree/Tree" + (i + 1) + ".obj");
+        treeModels[i] = loadShape("Tree/Tree" + (i + 1) + ".obj");
     }
     
 }
