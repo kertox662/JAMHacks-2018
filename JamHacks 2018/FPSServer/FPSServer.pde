@@ -3,7 +3,7 @@ import processing.net.*;
 Server s;
 PApplet applet = this;
 
-float[][] playerData;
+String[][] playerData;
 String[] clientsConnected;
 
 String treeData; 
@@ -19,25 +19,37 @@ String testString = "Hello there ";
 
 void setup() {
     s = new Server(applet, 4531);
-    playerData = new float[10][5];
+    playerData = new String[10][5];
     clientsConnected = new String[10];
     loadTerrain();
     terrainString = dataToString(terrain);
-    println(terrainString.length());
-    //println(terrainString);
-    treeData = generateObjects(5);
-    bushData = generateObjects(5);
+    treeData = generateObjects(10);
+    bushData = generateObjects(10);
+    println(treeData);
 }
 
 void draw() {
-    
+    if(s.available() != null){
+        //Donny's parser
+    }
 }
 
 void addPlayer(Client c) {
     for(int i = 0; i < playerData.length; i++) {
-        //if (playerData[i] == {0, 0, 0, 0, 0}){
-        //    playerData[i] = {0, 0, -50, 0, 0};
-        //}
+        int numTrue = 0;
+        for(int j =0; j < playerData[i].length; i++){
+            if (float(playerData[i][j]) == 0){
+                numTrue++;
+            }
+        }
+        if (numTrue >= playerData[i].length){
+            playerData[i][0] = str(terrainLength/2 * scale);
+            playerData[i][1] = str(terrainWidth/2 * scale);
+            playerData[i][0] = str(terrain[terrainLength/2][terrainWidth/2]);
+            playerData[i][0] = "0";
+            playerData[i][0] = "0";
+            break;
+        }
     }
 }
 
@@ -65,9 +77,9 @@ String generateObjects(int numOBJ){
     }
     String[] objStringList = new String[numOBJ];
     for(int i = 0; i < numOBJ; i++){
-       objStringList[i] = join(objList[i], ",");
+       objStringList[i] = join(objList[i], "\n");
     }
-    String objString = join(objStringList, "|");
+    String objString = join(objStringList, "\n*\n");
     return objString;
 }
 
@@ -80,10 +92,10 @@ String dataToString(float[][] data){
         for(int j = 0; j < data[i].length; j++){
             twodStringList[i][j] = str(data[i][j]);
         }
-        dataStringList[i] = join(twodStringList[i], ",");
+        dataStringList[i] = join(twodStringList[i], "\n");
     }
     
-    dataString = join(dataStringList, "|");
+    dataString = join(dataStringList, "*\n");
     return dataString;
 }
 
@@ -98,16 +110,22 @@ void loadTerrain() {
 }
 
 void serverEvent(Server server, Client client) {
-    //server.write("Scale");
+    addPlayer(client);
+    server.write("Terre");
     send(server, str(scale));
     send(server, str(terrainLength));
     send(server, str(terrainWidth));
-    for(int i = 0; i < terrainLength; i++){
-        for(int j = 0; j < terrainWidth; j++){
-            send(server, str(terrain[i][j]));
-        }
-    }
+    server.write(terrainString);
+    //for(int i = 0; i < terrainLength; i++){
+    //    for(int j = 0; j < terrainWidth; j++){
+    //        send(server, str(terrain[i][j]));
+    //    }
+    //}
     //server.write(terrainString);
+    //server.write("Tree");
+    //server.write(treeData);
+    //server.write("Bush");
+    //server.write(bushData);
 }
 
 void send(Server server, String input){
