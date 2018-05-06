@@ -4,13 +4,13 @@ import java.awt.Toolkit;
 import shapes3d.*;
 
 PApplet applet = this;
-Environment[] environment = {};
 
 boolean doneFrame = false;
 
 void setup() {
     setRobot();
     fullScreen(P3D);
+    c = new Client(applet, ipToServer, 4531);
     frameRate(1000);
     loadTerrain();
     loadModels();
