@@ -30,6 +30,8 @@ void loadEnvironment(){
         grass.xAngle = float(getMessage());
         grass.addToEnvironment();
     }
+    
+    println(numTree , numBush, numGrass);
 }
 
 void drawEnvironment() {

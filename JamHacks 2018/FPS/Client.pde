@@ -2,7 +2,7 @@ import processing.net.*;
 
 Client user;
 int clientID = -1;
-String ipToServer = "192.168.1.15";
+String ipToServer = "127.0.0.1";
 //Stores all the messages server has sent out.
 String[] serverMessages = {};
 //The index of the message read.
