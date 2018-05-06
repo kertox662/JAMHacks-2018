@@ -54,6 +54,14 @@ String getMessage() {
     return message;
 }
 
+String[] getMostRecentMessages(int numMessages){
+    String[] messages = new String[numMessages];
+    for(int i = 0; i < numMessages; i++){
+        messages[i] = serverMessages[serverMessages.length - numMessages + i];
+    }
+    return messages;
+}
+
 void exit() {
     println("id is", clientID);
     user.write(clientID);

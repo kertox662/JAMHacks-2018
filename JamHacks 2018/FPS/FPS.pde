@@ -42,8 +42,6 @@ void draw() {
 
     //2D stuff.
     currentReticle.display();
-
-    println(serverMessages.length);
     
     doneFrame = true;
     

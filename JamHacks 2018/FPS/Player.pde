@@ -7,12 +7,12 @@ class Player extends Agent {
         super(xPos, yPos, zPos, xA, 0.0, 10);
         this.speed = speed;
     }
-    
-    String toString(){
+
+    String toString() {
         return position.x + "," + position.y + "," + position.z + "," + xAngle + "," + yAngle;
     }
 
-    void display(){
+    void display() {
         pushMatrix();
         translate(position.x, position.y, position.z);
         rotateZ(xAngle);
@@ -22,24 +22,38 @@ class Player extends Agent {
     }
 }
 
-void initializePlayerData(){
-    for(int i = 0; i < playerData.length; i++){
+void initializePlayerData() {
+    for (int i = 0; i < playerData.length; i++) {
         playerData[i] = new Player(0, 0, 0, 0, 15);
     }
 }
 
+String[] playerDataRaw = new String[playerData.length * 5 + 1];
+int dataIndex = -1;
 void updatePlayerData() {
-    if (messageIndex != serverMessages.length - 1) {
-        for (int i = 0; i < playerData.length; i++) {
-            playerData[i].position.x = float(getMessage());
-            playerData[i].position.y = float(getMessage());
-            playerData[i].position.z = float(getMessage());
-            playerData[i].xAngle = float(getMessage());
-            playerData[i].yAngle = float(getMessage());
-            println(playerData[i]);
-            if(i != clientID){
-                playerData[i].display();
+    String[] playerDataRaw = getMostRecentMessages(playerData.length * 5 + 1);
+    for(int b = 0; b < playerDataRaw.length; b++){
+        if (playerDataRaw[playerDataRaw.length - 1 - b] == "*") {
+            if (messageIndex != serverMessages.length - 1) {
+                for (int i = 0; i < playerData.length; i++) {
+                    playerData[i].position.x = float(getNextData());
+                    playerData[i].position.y = float(getNextData());
+                    playerData[i].position.z = float(getNextData());
+                    playerData[i].xAngle = float(getNextData());
+                    playerData[i].yAngle = float(getNextData());
+                    //println(playerData[i]);
+                    if (i != clientID) {
+                        playerData[i].display();
+                    }
+                }
             }
+            dataIndex = -1;
+            break;
         }
     }
+}
+
+private String getNextData() {
+    dataIndex++;
+    return playerDataRaw[dataIndex];
 }
