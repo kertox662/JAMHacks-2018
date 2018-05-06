@@ -1,19 +1,20 @@
 int terrainLength = 100;
 int terrainWidth = 100;
-float scale = 120;
+float scale = 100;
 float[][] terrain = new float[terrainLength][terrainWidth];
 
 void loadTerrain() {
     for (int i = 0; i < terrainLength; i++) {
         for (int j = 0; j < terrainLength; j++) {
-            terrain[i][j] = -1000 + 1000.0 * noise(i/20.0, j/20.0);
+            terrain[i][j] = -1000 + 1000.0 * noise(i/15.0, j/15.0);
+            
+            
         }
     }
 }
 
 void drawTerrain() {
     fill(144, 245, 0);
-    stroke(40, 80, 0);
     for (int y = 0; y < terrainLength-1; y++) {
         beginShape(TRIANGLE_STRIP);
         for (int x = 0; x < terrainWidth; x++) {
@@ -22,4 +23,8 @@ void drawTerrain() {
         }
         endShape();
     }
+}
+
+float getHeight(float xPos, float yPos){
+
 }
