@@ -10,11 +10,7 @@ boolean doneFrame = false;
 void setup() {
     setRobot();
     fullScreen(P3D);
-    c = new Client(applet, ipToServer, 4531);
-    String dataIN;
-    if(c.available() > 0){
-        println(c.readString());
-    }
+    createClient();
     frameRate(1000);
     loadTerrain();
     loadModels();
