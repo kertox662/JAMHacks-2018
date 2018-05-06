@@ -4,7 +4,7 @@ Server s;
 PApplet applet = this;
 
 void setup() {
-    size(800, 800);
+    size(800, 600);
     s = new Server(applet, 4531);
     playerData = new float[4][5];
     clientsConnected = new String[10];

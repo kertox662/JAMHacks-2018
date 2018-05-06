@@ -2,7 +2,7 @@ import processing.net.*;
 
 Client user;
 int clientID = -1;
-String ipToServer = "192.168.1.25";
+String ipToServer = "192.168.1.15";
 //Stores all the messages server has sent out.
 String[] serverMessages = {};
 //The index of the message read.
@@ -28,7 +28,7 @@ void createClient() {
 }
 
 void sendData() {
-    user.write(str(0) + "," + str(clientID) + ","
+    user.write(str(clientID) + "," + str(0) + ","
         + str(mainPlayer.position.x) + ","
         + str(mainPlayer.position.y) + ","
         + str(mainPlayer.position.z) + ","
@@ -64,6 +64,6 @@ String[] getMostRecentMessages(int numMessages){
 
 void exit() {
     println("id is", clientID);
-    user.write(clientID);
+    user.write(str(clientID));
     super.exit();
 }

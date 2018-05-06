@@ -6,6 +6,7 @@ int id;
 
 void serverEvent(Server server, Client client) {
     addPlayer();
+    println("Client ip is", client.ip());
     send(server, str(id));
     
     send(server, str(scale));
@@ -26,7 +27,7 @@ void serverEvent(Server server, Client client) {
 
 
 
-void addPlayer() {
+void addPlayer() {            
     for(int i = 0; i < playerData.length; i++) {
         boolean empty = true;
         for(int j = 0; j < 5; j++){
@@ -38,7 +39,7 @@ void addPlayer() {
         if (empty){
             playerData[i] = new float[]{100, 100, 150, 0, 0};
             id = i;
-            println(id);
+            println("New player joined:", id);
             numPlayers++;
             break;
         }
@@ -49,8 +50,9 @@ void addPlayer() {
 void disconnectEvent(Client c){
     println("Client", c.ip(), "has disconnected");
     Client client = s.available();
-    int id = int(client.readString());
-    playerData[id] = new float[]{0,0,0,0,0};
-    println("Had ID of", id);
+    println(client.readString());
+    //int id = int(client.readString());
+    //playerData[id] = new float[]{0,0,0,0,0};
+    //println("Had ID of", id);
     numPlayers--;
 }
