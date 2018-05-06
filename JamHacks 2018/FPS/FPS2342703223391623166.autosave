@@ -10,12 +10,11 @@ boolean doneFrame = false;
 void setup() {
     setRobot();
     fullScreen(P3D);
-    createClient();
+    //createClient();
     frameRate(1000);
     loadTerrain();
     loadModels();
     loadReticles();
-    currentReticle = new Reticle(reticleImg1);
 }
 
 void draw() {
@@ -34,10 +33,7 @@ void draw() {
     //2D stuff.
     currentReticle.display();
     
-    checkServer();
-    
     doneFrame = true;
-    
 }
 
 void waitForFrameFinish() {

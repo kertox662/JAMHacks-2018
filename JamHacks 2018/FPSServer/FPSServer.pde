@@ -90,5 +90,5 @@ void loadTerrain() {
 }
 
 void serverEvent(Server server, Client client) {
-    server.write(testString);
+    server.write(testString + client.ip());
 }
