@@ -7,3 +7,6 @@ class Tree extends Environment {
         
     }
 }
+
+void loadTrees(){
+}

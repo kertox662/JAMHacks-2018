@@ -5,3 +5,7 @@ class Bush extends Environment{
         environment = (Environment[]) append(environment, this);
     }
 }
+
+void loadBushes(){
+    bush = loadShape("Bush/Bush.obj");
+}

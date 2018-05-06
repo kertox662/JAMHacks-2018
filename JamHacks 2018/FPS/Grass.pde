@@ -5,3 +5,7 @@ class Grass extends Environment{
         environment = (Environment[]) append(environment, this);
     }
 }
+
+void loadGrass(){
+    grass = loadShape("DryGrass2/LPDryGrass2.obj");
+}
