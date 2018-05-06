@@ -1,10 +1,8 @@
 String[] modelListTrees = {""};
 
 class Tree extends Environment {
-
-    Tree(float xPos, float yPos, float zPos, float xA, float yA) {
-        super(xPos, yPos, zPos, xA, yA, bush);    
-        
+    Tree(float xPos, float yPos){
+        super(xPos, yPos, getHeight(xPos, yPos), random(0, TWO_PI), 0, bush);
     }
 }
 

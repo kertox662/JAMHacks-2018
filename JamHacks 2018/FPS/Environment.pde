@@ -12,7 +12,24 @@ class Environment extends Agent {
 }
 
 void loadEnvironment(){
-    
+    int numTree = int(getMessage());
+    for(int i = 0; i < numTree; i++){
+        Tree tree = new Tree(float(getMessage()), float(getMessage()));
+        tree.xAngle = float(getMessage());
+        tree.addToEnvironment();
+    }
+    int numBush = int(getMessage());
+    for(int i = 0; i < numBush; i++){
+        Bush bush = new Bush(float(getMessage()), float(getMessage()));
+        bush.xAngle = float(getMessage());
+        bush.addToEnvironment();
+    }
+    int numGrass = int(getMessage());
+    for(int i = 0; i < numGrass; i++){
+        Grass grass = new Grass(float(getMessage()), float(getMessage()));
+        grass.xAngle = float(getMessage());
+        grass.addToEnvironment();
+    }
 }
 
 void drawEnvironment() {

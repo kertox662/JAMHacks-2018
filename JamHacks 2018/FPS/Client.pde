@@ -18,7 +18,7 @@ int getServerID(String[] ids) {
 
 void createClient() {
     user = new Client(applet, ipToServer, 4531);
-    delay(2000);
+    delay(1000);
     checkServer();
 }
 
@@ -29,6 +29,7 @@ void checkServer(){
 }
 
 String getMessage(){
+    checkServer();
     String message = "";
     try{
         messageIndex++;
