@@ -42,15 +42,6 @@ void checkServer() {
     }
 }
 
-void sendData() {
-    user.write(str(0) + "," + str(clientID) + ","
-        + str(mainPlayer.position.x) + ","
-        + str(mainPlayer.position.y) + ","
-        + str(mainPlayer.position.z) + ","
-        + str(mainPlayer.xAngle) + ","
-        + str(mainPlayer.yAngle));
-}
-
 String getMessage() {
     String message = "";
     try {

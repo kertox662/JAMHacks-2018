@@ -32,5 +32,9 @@ void drawTerrain() {
 float getHeight(float xPos, float yPos) {
      int xMin = int(xPos/scale);
      int yMin = int(yPos/scale);
-     return (terrain[xMin][yMin] + terrain[xMin+1][yMin] + terrain[xMin][yMin+1] + terrain[xMin+1][yMin+1])/4;
+     try{
+         return (terrain[xMin][yMin] + terrain[xMin+1][yMin] + terrain[xMin][yMin+1] + terrain[xMin+1][yMin+1])/4;
+     }catch(Exception e){
+         return 0;
+     }
 }
