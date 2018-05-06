@@ -14,7 +14,8 @@ void setup() {
     clientsConnected = new String[10];
     loadTerrain();
     terrainString = dataToString(terrain);
-    treeData = generateObjects(10);
-    bushData = generateObjects(10);
+    treeData = generateObjects(numTrees);
+    bushData = generateObjects(numBushes);
+    grassData = generateObjects(numGrass);
     //println(terrainString);
 }

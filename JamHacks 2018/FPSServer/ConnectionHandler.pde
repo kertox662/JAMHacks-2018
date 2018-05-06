@@ -2,27 +2,25 @@ String[] clientsConnected;
 
 String[][] playerData;
 
+int id;
+
 void serverEvent(Server server, Client client) {
     addPlayer();
+    send(server, str(id));
     send(server, str(scale));
     send(server, str(terrainLength));
     send(server, str(terrainWidth));
     server.write(terrainString);
-    //for(int i = 0; i < terrainLength; i++){
-    //    for(int j = 0; j < terrainWidth; j++){
-    //        send(server, str(terrain[i][j]));
-    //    }
-    //}
-    //server.write(terrainString);
+
     send(server, "");
     send(server,str(numTrees));
-    println(numBushes);
-    println(bushData);
-    //println(num);
     server.write(treeData);
     send(server, "");
     send(server, str(numBushes));
     server.write(bushData);
+    send(server, "");
+    send(server, str(numGrass));
+    server.write(grassData);
 }
 
 
@@ -38,6 +36,7 @@ void addPlayer() {
         }
         if (empty){
             playerData[i] = new String[]{str(terrainLength/2 * scale), str(terrainWidth/2 * scale), str(terrain[terrainLength/2][terrainWidth/2]), "0", "0"};
+            id = i;
             break;
         }
     }
