@@ -1,6 +1,7 @@
 import processing.net.*;
 
 Client user;
+int clientID = -1;
 String ipToServer = "192.168.1.25";
 //Stores all the messages server has sent out.
 String[] serverMessages = {};
@@ -16,18 +17,14 @@ int getServerID(String[] ids) {
     return -1;
 }
 
-int getID(){
-    return int(getMessage());
+void getID(){
+    clientID = int(getMessage());
 }
 
 void createClient() {
     user = new Client(applet, ipToServer, 4531);
     delay(3000);
     checkServer();
-}
-
-void sendData(){
-    user.write(str(0) + "," + str(mainPlayer.id) + "," + mainPlayer.position.x + "," + mainPlayer.position.y + "," + mainPlayer.position.z + "," + mainPlayer.xAngle + "," + mainPlayer.yAngle + "\n");
 }
 
 void checkServer() {
@@ -49,6 +46,7 @@ String getMessage() {
 }
 
 void exit(){
-    user.write(mainPlayer.id);
+    println("id is", clientID);
+    user.write(clientID);
     super.exit();
 }
