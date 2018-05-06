@@ -26,6 +26,7 @@ void initializePlayerData() {
     for (int i = 0; i < playerData.length; i++) {
         playerData[i] = new Player(0, 0, 0, 0, 15);
     }
+    playerData[clientID] = mainPlayer;
 }
 
 String[] playerDataRaw = new String[playerData.length * 5 + 1];
