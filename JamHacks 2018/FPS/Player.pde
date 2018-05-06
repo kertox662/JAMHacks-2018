@@ -27,8 +27,13 @@ class Player extends Agent {
 void updatePlayerData(){
     if(messageIndex != serverMessages.length - 1){
         for(int i = 0; i < 10; i++){
-            for(int j = 0; j < 10; j++){
-                getMessage();
+            playerData[i].position.x = float(getMessage());
+            playerData[i].position.y = float(getMessage());
+            playerData[i].position.z = float(getMessage());
+            playerData[i].xAngle = float(getMessage());
+            playerData[i].yAngle = float(getMessage());
+            if(i != mainPlayer.id){
+                playerData[i].display();
             }
         }
     }
