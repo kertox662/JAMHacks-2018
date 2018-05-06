@@ -12,7 +12,9 @@ void setup() {
     loadModels();
     fullScreen(P3D);
     frameRate(1000);
+    //Hey! Order matters here. Don't switch around the functions; it will mess up input from server.
     createClient();
+    getID();
     loadTerrain();
     loadEnvironment();
     loadReticles();
@@ -35,8 +37,6 @@ void draw() {
 
     //2D stuff.
     currentReticle.display();
-    
-    checkServer();
     
     doneFrame = true;
     

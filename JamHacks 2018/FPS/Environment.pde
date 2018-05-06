@@ -19,7 +19,6 @@ void loadEnvironment(){
         tree.addToEnvironment();
     }
     int numBush = int(getMessage());
-    println(numBush + " *****");
     for(int i = 0; i < numBush; i++){
         Bush bush = new Bush(float(getMessage()), float(getMessage()));
         bush.xAngle = float(getMessage());
