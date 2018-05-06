@@ -1,5 +1,5 @@
 void mousePressed() {
-    sounds()
+    sounds();
 }
 
 void mouseMoved() {
