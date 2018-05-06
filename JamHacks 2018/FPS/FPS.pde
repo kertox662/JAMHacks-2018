@@ -21,14 +21,10 @@ void setup() {
     loadEnvironment();
     loadReticles();
     currentReticle = new Reticle(reticleImg1);
-    for(int i = 0; i<10; i++){
-        playerData[i] = new Player(0,0,0,0,15);
-    }
 }
 
 void draw() {
     doneFrame = false;
-    updatePlayerData();
     //Background and Cursor.
     lights();
     background(82, 210, 255);
@@ -37,7 +33,7 @@ void draw() {
     keyRespond();
     sendData();
     checkServer();
-    
+    //updatePlayerData();
     updateCamera();
 
     //3D stuff.
@@ -47,7 +43,6 @@ void draw() {
 
     //2D stuff.
     currentReticle.display();
-    
     
     doneFrame = true;
     
