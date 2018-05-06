@@ -1,10 +1,15 @@
-PShape grass;
-class Grass extends Environment{
-    Grass(float xPos, float yPos){
-        super(xPos, yPos, getHeight(xPos, yPos), random(0, TWO_PI), 0, grass);
+int numGrassModels = 8;
+PShape[] grassModels = new PShape[numGrassModels];
+
+
+class Grass extends Environment {
+    Grass(float xPos, float yPos) {
+        super(xPos, yPos, getHeight(xPos, yPos), random(0, TWO_PI), 0, grassModels[0]);
     }
 }
 
-void loadGrass(){
-    grass = loadShape("DryGrass2/LPDryGrass2.obj");
+void loadGrass() {
+    for (int i = 0; i < numGrassModels; i++) {
+        grassModels[i] = loadShape("Grass/Grass" + (i + 1) + ".obj");
+    }
 }
