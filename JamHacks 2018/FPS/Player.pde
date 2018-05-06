@@ -32,24 +32,30 @@ String[] playerDataRaw = new String[playerData.length * 5 + 1];
 int dataIndex = -1;
 void updatePlayerData() {
     String[] playerDataRaw = getMostRecentMessages(playerData.length * 5 + 1);
-    for(int b = 0; b < playerDataRaw.length; b++){
-        if (playerDataRaw[playerDataRaw.length - 1 - b] == "*") {
-            if (messageIndex != serverMessages.length - 1) {
-                for (int i = 0; i < playerData.length; i++) {
+    for (int b = 0; b < playerDataRaw.length; b++) {
+        if (playerDataRaw[playerDataRaw.length - 1 - b] == "*" && messageIndex != serverMessages.length - 1) {
+            for (int i = 0; i < playerData.length; i++) {
+                if(i != clientID){
                     playerData[i].position.x = float(getNextData());
                     playerData[i].position.y = float(getNextData());
                     playerData[i].position.z = float(getNextData());
                     playerData[i].xAngle = float(getNextData());
                     playerData[i].yAngle = float(getNextData());
-                    //println(playerData[i]);
-                    if (i != clientID) {
-                        playerData[i].display();
+                }else{
+                    for(int j = 0; j < 5; j++){
+                        getNextData();
                     }
                 }
             }
             dataIndex = -1;
             break;
         }
+    }
+}
+
+void drawPlayers(){
+    for(int i = 0; i < playerData.length; i++){
+        playerData[i].display();
     }
 }
 

@@ -50,9 +50,8 @@ void addPlayer() {
 void disconnectEvent(Client c){
     println("Client", c.ip(), "has disconnected");
     Client client = s.available();
-    println(client.readString());
-    //int id = int(client.readString());
-    //playerData[id] = new float[]{0,0,0,0,0};
-    //println("Had ID of", id);
+    int id = int(split(client.readString(), ",")[0]);
+    playerData[id] = new float[]{0, 0, 0, 0, 0};
+    println("ID of client is", id);
     numPlayers--;
 }

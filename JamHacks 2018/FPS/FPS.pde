@@ -38,7 +38,7 @@ void draw() {
     //3D stuff.
     drawTerrain();
     drawEnvironment();
-    mainPlayer.display();
+    drawPlayers();
 
     //2D stuff.
     currentReticle.display();

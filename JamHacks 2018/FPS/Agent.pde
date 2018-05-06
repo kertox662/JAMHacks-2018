@@ -23,9 +23,7 @@ abstract class Agent {
         try{
         shape(model);
         }
-        catch(Exception e){
-        //    e.printStackTrace();
-        }
+        catch(Exception e){}
         popMatrix();
     }
 }
