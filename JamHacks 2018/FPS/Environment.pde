@@ -1,8 +1,9 @@
 Environment[] environment = {};
 
 class Environment extends Agent {
-    Environment(float xPos, float yPos, float zPos, float xA, float yA) {
+    Environment(float xPos, float yPos, float zPos, float xA, float yA, PShape model) {
         super(xPos, yPos, zPos, xA, yA);
+        this.model = model;
     }
 }
 
