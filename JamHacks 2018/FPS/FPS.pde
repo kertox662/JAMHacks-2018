@@ -3,12 +3,18 @@ import java.awt.MouseInfo;
 import java.awt.Toolkit;
 import shapes3d.*;
 
+
+
+
+
 PApplet applet = this;
 
 boolean doneFrame = false;
 
 void setup() {
     setRobot();
+    minim = new Minim(applet);
+    
     loadModels();
     fullScreen(P3D);
     frameRate(1000);
