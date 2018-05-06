@@ -16,8 +16,9 @@ int getServerID(String[] ids) {
 
 void createClient() {
     c = new Client(applet, ipToServer, 4531);
-    delay(1000);
+    delay(2000);
     checkServer();
+    println("done");
 }
 
 void checkServer(){
