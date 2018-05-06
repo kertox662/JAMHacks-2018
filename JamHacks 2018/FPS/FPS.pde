@@ -10,8 +10,8 @@ boolean doneFrame = false;
 void setup() {
     setRobot();
     fullScreen(P3D);
-    createClient();
     frameRate(1000);
+    createClient();
     loadTerrain();
     loadModels();
     loadReticles();

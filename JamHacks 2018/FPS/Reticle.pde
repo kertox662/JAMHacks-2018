@@ -4,6 +4,9 @@ PImage reticleImg2;
 PImage reticleImg3;
 PImage reticleImg4;
 
+PImage[] reticleImgs = {};
+Reticle[] reticles = {};
+
 Reticle currentReticle;
 
 class Reticle {
