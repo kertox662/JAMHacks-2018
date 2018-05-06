@@ -17,7 +17,8 @@ void setup() {
     loadReticles();
     currentReticle = new Reticle(reticleImg1);
     for(int i =0; i < 200; i++){
-        Bush bush1 = new Bush(random(1000, terrain.length * scale -1000), random(1000, terrain[0].length * scale - 1000));
+        Bush bush = new Bush(random(1000, terrain.length * scale -1000), random(1000, terrain[0].length * scale - 1000));
+        bush.addToEnvironment();
     }
 }
 

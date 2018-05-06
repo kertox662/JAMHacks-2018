@@ -5,6 +5,10 @@ class Environment extends Agent {
         super(xPos, yPos, zPos, xA, yA);
         this.model = model;
     }
+    
+    void addToEnvironment(){
+        environment = (Environment[]) append(environment, this);
+    }
 }
 
 void drawEnvironment() {
