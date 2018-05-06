@@ -16,6 +16,5 @@ String dataToString(float[][] data){
     }
     
     dataString = join(dataStringList, "\n");
-    dataString = "\n" + dataString;
     return dataString;
 }

@@ -14,13 +14,13 @@ void serverEvent(Server server, Client client) {
     //    }
     //}
     //server.write(terrainString);
-    //send(server, "\n");
+    send(server, "");
     send(server,str(numTrees));
     println(numBushes);
     println(bushData);
     //println(num);
     server.write(treeData);
-    //send(server, "\n");
+    send(server, "");
     send(server, str(numBushes));
     server.write(bushData);
 }
@@ -41,5 +41,5 @@ void addPlayer() {
             break;
         }
     }
-    println("done");
+    //println("done");
 }

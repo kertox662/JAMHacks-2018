@@ -1,4 +1,4 @@
-int numGrassModels = 8;
+int numGrassModels = 4;
 PShape[] grassModels = new PShape[numGrassModels];
 
 
@@ -10,6 +10,6 @@ class Grass extends Environment {
 
 void loadGrass() {
     for (int i = 0; i < numGrassModels; i++) {
-        grassModels[i] = loadShape("Grass/Grass" + (i + 1) + ".obj");
+        grassModels[i] = loadShape("Grass/LPGrass" + (i + 1) + ".obj");
     }
 }
