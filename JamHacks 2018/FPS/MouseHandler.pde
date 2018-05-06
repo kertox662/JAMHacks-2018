@@ -1,6 +1,4 @@
 void mousePressed() {
-  gunshot = minim.loadFile("Sounds/Gunshot2.wav");
-    gunshot.play();
     
 }
 
