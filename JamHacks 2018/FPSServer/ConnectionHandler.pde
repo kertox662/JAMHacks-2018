@@ -14,10 +14,15 @@ void serverEvent(Server server, Client client) {
     //    }
     //}
     //server.write(terrainString);
-    //server.write("Tree");
-    //server.write(treeData);
-    //server.write("Bush");
-    //server.write(bushData);
+    //send(server, "\n");
+    send(server,str(numTrees));
+    println(numBushes);
+    println(bushData);
+    //println(num);
+    server.write(treeData);
+    //send(server, "\n");
+    send(server, str(numBushes));
+    server.write(bushData);
 }
 
 
