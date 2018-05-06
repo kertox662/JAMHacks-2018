@@ -20,7 +20,12 @@ abstract class Agent {
         rotateZ(xAngle);
         rotateX(yAngle + PI/2);
         scale(scale);
+        try{
         shape(model);
+        }
+        catch(Exception e){
+        //    e.printStackTrace();
+        }
         popMatrix();
     }
 }

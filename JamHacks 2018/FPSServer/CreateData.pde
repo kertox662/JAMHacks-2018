@@ -10,7 +10,7 @@ String terrainString;
 
 int numBushes = 50;
 int numTrees = 20;
-int numGrass = 2000;
+int numGrass = 200;
 
 String generateObjects(int numOBJ){
     String[][] objList = new String[numOBJ][3];

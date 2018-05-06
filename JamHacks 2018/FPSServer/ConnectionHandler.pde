@@ -37,6 +37,7 @@ void addPlayer() {
         if (empty){
             playerData[i] = new float[]{terrainLength/2 * scale, terrainWidth/2 * scale, terrain[terrainLength/2][terrainWidth/2], 0, 0};
             id = i;
+            println(id);
             numPlayers++;
             break;
         }
@@ -46,5 +47,9 @@ void addPlayer() {
 
 void disconnectEvent(Client c){
     println("Client", c.ip(), "has disconnected");
+    Client client = s.available();
+    int id = int(client.readString());
+    playerData[id] = new float[]{0,0,0,0,0};
+    println("Had ID of", id);
     numPlayers--;
 }

@@ -1,10 +1,10 @@
 void draw() {
     drawGUI();
     Client c = s.available();
-    if(c != null){
+    if (c != null) {
         float[][] info = decode(c.readString());
-        for(int i = 0; i < info.length; i++){
-            if (info[i][0] == 0){
+        for (int i = 0; i < info.length; i++) {
+            if (info[i][0] == 0) {
                 //id, x, y, z, xa, ya
                 //println();
                 println(info[i][1], info[i][2], info[i][3], info[i][4], info[i][5], info[i][6]);
@@ -16,22 +16,22 @@ void draw() {
                 float yA = info[i][6];
                 playerData[id] = new float[] {x, y, z, xA, yA};
                 //println("Player Data: ", playerData[id]);
-            }else if (info[i][0] == 1){
+            } else if (info[i][0] == 1) {
             }
         }
     }
     String dataString = dataToString(playerData);
-    println(dataString);
+    //println(dataString);
     send(s, dataString);
 }
 
-float[][] decode(String data){
+float[][] decode(String data) {
     String[] rawRows = split(data, "\n");
     float[][] messages = new float[rawRows.length][];
-    for(int i = 0; i < rawRows.length; i++){
-        String[] rawRow = split(rawRows[i],",");
+    for (int i = 0; i < rawRows.length; i++) {
+        String[] rawRow = split(rawRows[i], ",");
         float[] messageRow = new float[rawRow.length];
-        for(int j = 0; j < rawRow.length; j++){
+        for (int j = 0; j < rawRow.length; j++) {
             messageRow[j] = float(rawRow[j]);
         }
         messages[i] = messageRow;
