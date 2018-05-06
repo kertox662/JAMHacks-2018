@@ -45,8 +45,8 @@ String getMessage() {
     return message;
 }
 
-void stop(){
-    print("lol");
-    //println("id is", clientID);
-    //user.write(clientID);
+void exit(){
+    println("id is", clientID);
+    user.write(clientID);
+    super.exit();
 }
