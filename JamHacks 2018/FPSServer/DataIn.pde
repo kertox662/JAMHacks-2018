@@ -1,28 +1,35 @@
-String nextMessage = "Unknown";
-
 void draw() {
-    float[][] info = {};
-    if(s.available() != null){
-        
-        if (nextMessage == "Coords"){
-            // id = First line read
-            // Coordinates are next 5 lines
+    drawGUI();
+    Client c = s.available();
+    if(c != null){
+        float[][] info = decode(c.readString());
+        for(int i = 0; i < info.length; i++){
+            if (info[i][0] == 0){
+                //id, x, y, z, xa, ya
+                //println();
+                println(info[i][1], info[i][2], info[i][3], info[i][4], info[i][5], info[i][6]);
+                int id = int(info[i][1]);
+                float x = info[i][2];
+                float y = info[i][3];
+                float z = info[i][4];
+                float xA = info[i][5];
+                float yA = info[i][6];
+                playerData[id] = new float[] {x, y, z, xA, yA};
+                //println("Player Data: ", playerData[id]);
+            }else if (info[i][0] == 1){
+            }
         }
-        
-        else if (nextMessage == "Shoot"){
-            //id = First Line read
-            // Second Says if it hits something
-            // If true, next 3 are coordinates of player hit
-        }
-        
     }
+    String dataString = dataToString(playerData);
+    println(dataString);
+    send(s, dataString);
 }
 
 float[][] decode(String data){
-    String[] rawRows = data.split("\n");
+    String[] rawRows = split(data, "\n");
     float[][] messages = new float[rawRows.length][];
     for(int i = 0; i < rawRows.length; i++){
-        String[] rawRow = rawRows[i].split(",");
+        String[] rawRow = split(rawRows[i],",");
         float[] messageRow = new float[rawRow.length];
         for(int j = 0; j < rawRow.length; j++){
             messageRow[j] = float(rawRow[j]);
