@@ -19,6 +19,7 @@ void setup() {
     loadEnvironment();
     loadReticles();
     currentReticle = new Reticle(reticleImg1);
+    initializePlayerData();
 }
 
 void draw() {
@@ -29,9 +30,9 @@ void draw() {
     setCursorToCenter();
     
     keyRespond();
-    sendData();
     checkServer();
-    //updatePlayerData();
+    sendData();
+    updatePlayerData();
     updateCamera();
 
     //3D stuff.
