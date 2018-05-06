@@ -13,6 +13,7 @@ void loadTerrain() {
 
 void drawTerrain() {
     fill(144, 245, 0);
+    stroke(40, 80, 0);
     for (int y = 0; y < terrainLength-1; y++) {
         beginShape(TRIANGLE_STRIP);
         for (int x = 0; x < terrainWidth; x++) {
