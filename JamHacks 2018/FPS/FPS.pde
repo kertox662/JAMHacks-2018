@@ -14,7 +14,7 @@ void setup() {
     frameRate(1000);
     //Hey! Order matters here. Don't switch around the functions; it will mess up input from server.
     createClient();
-    getID();
+    mainPlayer.id = getID();
     loadTerrain();
     loadEnvironment();
     loadReticles();
@@ -29,6 +29,9 @@ void draw() {
     setCursorToCenter();
     
     keyRespond();
+    sendData();
+    checkServer();
+    //updatePlayerData();
     updateCamera();
 
     //3D stuff.
