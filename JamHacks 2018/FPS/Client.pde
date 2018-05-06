@@ -1,8 +1,10 @@
 import processing.net.*;
 
-Client c;
+Client user;
 String ipToServer = "192.168.1.25";
+//Stores all the messages server has sent out.
 String[] serverMessages = {};
+//The index of the message read.
 int messageIndex = -1;
 
 int getServerID(String[] ids) {
@@ -22,8 +24,8 @@ void createClient() {
 }
 
 void checkServer(){
-    while (c.available() > 0) {
-        serverMessages = concat(serverMessages, c.readString().split("\n"));
+    while (user.available() > 0) {
+        serverMessages = concat(serverMessages, user.readString().split("\n"));
     }
 }
 
@@ -35,6 +37,5 @@ String getMessage(){
     }catch(Exception e){
         messageIndex--;
     }
-    //println(message);
     return message;
 }

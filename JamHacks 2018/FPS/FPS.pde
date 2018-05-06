@@ -13,13 +13,14 @@ void setup() {
     frameRate(1000);
     createClient();
     loadTerrain();
+    loadEnvironment();
     loadModels();
     loadReticles();
     currentReticle = new Reticle(reticleImg1);
-    for(int i =0; i < 200; i++){
-        Bush bush = new Bush(random(1000, terrain.length * scale -1000), random(1000, terrain[0].length * scale - 1000));
-        bush.addToEnvironment();
-    }
+    //for(int i =0; i < 200; i++){
+    //    Bush bush = new Bush(random(1000, terrain.length * scale -1000), random(1000, terrain[0].length * scale - 1000));
+    //    bush.addToEnvironment();
+    //}
 }
 
 void draw() {

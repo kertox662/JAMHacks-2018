@@ -11,6 +11,10 @@ class Environment extends Agent {
     }
 }
 
+void loadEnvironment(){
+    
+}
+
 void drawEnvironment() {
     for (int i = 0; i < environment.length; i++) {
         environment[i].display();
