@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-class Tree extends GameObject{
-     
-     Tree(){
-         super();
-         objModels = new PShape[]{tree1, tree2};
-         loadModel();
-     }
-     
-     void drawTree(){
-         drawModel();
-     }
-}
-=======
 class Tree extends Model{
      Tree(){
          super();
@@ -27,6 +13,4 @@ class Tree extends Model{
          b1.tag = str(id);
          this.addHitbox(b1);
      }
-     
 }
->>>>>>> master

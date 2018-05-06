@@ -17,7 +17,7 @@ int getServerID(String[] ids) {
     return -1;
 }
 
-void getID(){
+void getID() {
     clientID = int(getMessage());
 }
 
@@ -27,9 +27,18 @@ void createClient() {
     checkServer();
 }
 
+void sendData() {
+    user.write(str(0) + "," + str(clientID) + ","
+        + str(mainPlayer.position.x) + ","
+        + str(mainPlayer.position.y) + ","
+        + str(mainPlayer.position.z) + ","
+        + str(mainPlayer.xAngle) + ","
+        + str(mainPlayer.yAngle));
+}
+
 void checkServer() {
     while (user.available() > 0) {
-        serverMessages = concat(serverMessages, user.readString().split("\n"));
+        serverMessages = concat(serverMessages, split(user.readString(), "\n"));
     }
 }
 
@@ -45,7 +54,7 @@ String getMessage() {
     return message;
 }
 
-void exit(){
+void exit() {
     println("id is", clientID);
     user.write(clientID);
     super.exit();

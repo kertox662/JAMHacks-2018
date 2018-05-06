@@ -6,6 +6,7 @@ void loadTerrain() {
     scale = float(getMessage());
     int terrainLength = int(getMessage());
     int terrainWidth = int(getMessage());
+    println(terrainLength, terrainWidth);
     float[][] loadedTerrain = new float[terrainLength][terrainWidth];
     for (int i = 0; i < terrainLength; i++) {
         for (int j = 0; j < terrainWidth; j++) {
