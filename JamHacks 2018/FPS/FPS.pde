@@ -19,6 +19,7 @@ void setup() {
     loadTerrain();
     loadModels();
     loadReticles();
+    currentReticle = new Reticle(reticleImg1);
 }
 
 void draw() {

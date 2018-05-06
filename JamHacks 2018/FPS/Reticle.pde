@@ -1,30 +1,37 @@
-PImage reticle0;
-PImage reticle1;
-PImage reticle2;
-PImage reticle3;
-PImage reticle4;
+PImage reticleImg0;
+PImage reticleImg1;
+PImage reticleImg2;
+PImage reticleImg3;
+PImage reticleImg4;
 
-Reticle currentReticle = new Reticle(reticle1);
+Reticle currentReticle;
 
-class Reticle{
+class Reticle {
     PImage reticle;
     //PImage r is the .png file of the reticle.
-    Reticle(PImage r){
+    Reticle(PImage r) {
+        currentReticle = this;
         reticle = r;
     }
-    
-    void display(){
+
+    void display() {
+        noLights();
+        hint(DISABLE_DEPTH_TEST);
         pushMatrix();
         translateToCharacter();
+        translate(0, 500, 0);
+        rotateX(PI/2);
+        rotateZ(PI);
         image(reticle, -16, -16);
         popMatrix();
+        hint(ENABLE_DEPTH_TEST);
     }
 }
 
-void loadReticles(){
-    reticle0 = loadImage("PointerIcons/reticle0.png");
-    reticle1 = loadImage("PointerIcons/reticle1.png");
-    reticle2 = loadImage("PointerIcons/reticle2.png");
-    reticle3 = loadImage("PointerIcons/reticle3.png");
-    reticle4 = loadImage("PointerIcons/reticle4.png");
+void loadReticles() {
+    reticleImg0 = loadImage("PointerIcons/reticle0.png");
+    reticleImg1 = loadImage("PointerIcons/reticle1.png");
+    reticleImg2 = loadImage("PointerIcons/reticle2.png");
+    reticleImg3 = loadImage("PointerIcons/reticle3.png");
+    reticleImg4 = loadImage("PointerIcons/reticle4.png");
 }
