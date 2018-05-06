@@ -1,5 +1,4 @@
-int maxEnvironmentOBJ = 100;
-Environment[] environment = new Environment[maxEnvironmentOBJ];
+Environment[] environment = {};
 
 class Environment extends Agent {
     Environment(float xPos, float yPos, float zPos, float xA, float yA) {
