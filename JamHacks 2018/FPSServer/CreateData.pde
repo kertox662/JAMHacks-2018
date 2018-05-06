@@ -32,7 +32,7 @@ String generateObjects(int numOBJ){
 void loadTerrain() {
     for (int i = 0; i < terrainLength; i++) {
         for (int j = 0; j < terrainWidth; j++) {
-            terrain[i][j] = -1000 + 1000.0 * noise(i/10.0, j/10.0);
+            terrain[i][j] = -1000 + 0 * noise(i/10.0, j/10.0);
         }
     }
 }
