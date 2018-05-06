@@ -6,7 +6,7 @@ PApplet applet = this;
 void setup() {
     size(400,400);
     s = new Server(applet, 4531);
-    playerData = new float[10][5];
+    playerData = new float[4][5];
     clientsConnected = new String[10];
     loadTerrain();
     terrainString = dataToString(terrain);

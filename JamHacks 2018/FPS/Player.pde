@@ -1,5 +1,5 @@
 //This is a player. Data about the players is stored here.
-Player[] playerData = new Player[10];
+Player[] playerData = new Player[4];
 
 class Player extends Agent {
     float speed;
@@ -12,11 +12,14 @@ class Player extends Agent {
         return position.x + "," + position.y + "," + position.z + "," + xAngle + "," + yAngle;
     }
 
-    //void display(){
-    //    pushMatrix();
-    //    translate(position.x,,)
-    //    popMatrix();
-    //}
+    void display(){
+        pushMatrix();
+        translate(position.x, position.y, position.z);
+        rotateZ(xAngle);
+        rotateX(yAngle);
+        box(100, 100, 200);
+        popMatrix();
+    }
 }
 
 void initializePlayerData(){
@@ -27,7 +30,7 @@ void initializePlayerData(){
 
 void updatePlayerData() {
     if (messageIndex != serverMessages.length - 1) {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < playerData.length; i++) {
             playerData[i].position.x = float(getMessage());
             playerData[i].position.y = float(getMessage());
             playerData[i].position.z = float(getMessage());
