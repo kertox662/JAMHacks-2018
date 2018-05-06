@@ -14,10 +14,11 @@ void setup() {
     String dataIN;
     if(c.available() > 0){
         println(c.readString());
-    }    
+    }
     frameRate(1000);
     loadTerrain();
     loadModels();
+    loadReticles();
 }
 
 void draw() {
@@ -34,6 +35,8 @@ void draw() {
     drawEnvironment();
 
     //2D stuff.
+    currentReticle.display();
+    
     doneFrame = true;
 }
 
