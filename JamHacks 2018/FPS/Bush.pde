@@ -9,7 +9,7 @@ class Bush extends Environment{
 
 void loadBushes(){
     for (int i = 0; i < numBushModels; i++) {
-        bushModels[0] = loadShape("Bush/Bush" + (i + 1) + ".obj");
+        bushModels[i] = loadShape("Bush/Bush" + (i + 1) + ".obj");
     }
     
 }

@@ -7,21 +7,21 @@ int terrainWidth = 100;
 float[][] terrain = new float[terrainLength][terrainWidth];
 String terrainString;
 
+int numBushes = 10;
+int numTrees = 10;
 
 String generateObjects(int numOBJ){
-    String[][] objList = new String[numOBJ][5];
+    String[][] objList = new String[numOBJ][3];
     for(int i = 0; i<numOBJ; i++){
         objList[i][0] = str(int(random(0,terrainWidth)));
         objList[i][1] = str(int(random(0,terrainLength)));
-        objList[i][2] = str(terrain[int(objList[i][0])][int(objList[i][0])]);
-        objList[i][3] = str(random(TWO_PI));
-        objList[i][4] = "0";
+        objList[i][2] = str(random(TWO_PI));
     }
     String[] objStringList = new String[numOBJ];
     for(int i = 0; i < numOBJ; i++){
        objStringList[i] = join(objList[i], "\n");
     }
-    String objString = join(objStringList, "\n*\n");
+    String objString = join(objStringList, "\n");
     return objString;
 }
 

@@ -18,23 +18,24 @@ int getServerID(String[] ids) {
 
 void createClient() {
     user = new Client(applet, ipToServer, 4531);
-    delay(1000);
+    delay(3000);
     checkServer();
 }
 
-void checkServer(){
+void checkServer() {
     while (user.available() > 0) {
         serverMessages = concat(serverMessages, user.readString().split("\n"));
     }
 }
 
-String getMessage(){
+String getMessage() {
     checkServer();
     String message = "";
-    try{
+    try {
         messageIndex++;
         message = serverMessages[messageIndex];
-    }catch(Exception e){
+    }
+    catch(Exception e) {
         messageIndex--;
     }
     return message;
