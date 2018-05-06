@@ -3,7 +3,7 @@ PShape[] treeModels = new PShape[numTreeModels];
 
 class Tree extends Environment{
     Tree(float xPos, float yPos){
-        super(xPos, yPos, getHeight(xPos, yPos), random(0, TWO_PI), 0, treeModels[0]);
+        super(xPos, yPos, getHeight(xPos, yPos), random(0, TWO_PI), 0, treeModels[0], 300);
     }
 }
 

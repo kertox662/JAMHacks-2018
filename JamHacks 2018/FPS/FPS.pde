@@ -9,12 +9,12 @@ boolean doneFrame = false;
 
 void setup() {
     setRobot();
+    loadModels();
     fullScreen(P3D);
     frameRate(1000);
     createClient();
     loadTerrain();
     loadEnvironment();
-    loadModels();
     loadReticles();
     currentReticle = new Reticle(reticleImg1);
 }
