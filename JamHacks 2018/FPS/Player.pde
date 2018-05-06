@@ -2,7 +2,13 @@
 abstract class Player extends Agent {
     float speed;
     Player(float xPos, float yPos, float zPos, float xA, float speed) {
-        super(xPos, yPos, zPos, xA, 0.0, 100);
+        super(xPos, yPos, zPos, xA, 0.0, 10);
         this.speed = speed;
     }
+    
+    //void display(){
+    //    pushMatrix();
+    //    translate(position.x,,)
+    //    popMatrix();
+    //}
 }

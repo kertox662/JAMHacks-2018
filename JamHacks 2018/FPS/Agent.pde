@@ -29,4 +29,5 @@ void loadModels() {
     loadBushes();
     loadTrees();
     loadGrass();
+    loadGuns();
 }

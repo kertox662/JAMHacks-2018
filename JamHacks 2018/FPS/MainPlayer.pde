@@ -2,16 +2,20 @@ PShape gun;
 float PLAYER_HEIGHT = 150;
 Player mainPlayer = new MainPlayer(0, 0, PLAYER_HEIGHT, 0, 15);
 
-class MainPlayer extends Player{
+class MainPlayer extends Player {
     MainPlayer(float xPos, float yPos, float zPos, float xA, float speed) {
         super(xPos, yPos, zPos, xA, speed);
     }
-    
-    void display(){
+
+    void display() {
         pushMatrix();
         translateToCharacter();
-        translate(0, 100, 0);
-        //shape();
+        translate(-width/50, 150, -height/24);
+        rotateX(0.1 + PI/2);
+        rotateZ(PI/16);
+        rotateY(PI);
+        scale(scale);
+        shape(gun);
         popMatrix();
     }
 }
@@ -23,7 +27,7 @@ void updateCamera() {
         0, 0, -1);
 }
 
-void loadGuns(){
+void loadGuns() {
     gun = loadShape("Guns/Sig2.obj");
 }
 
