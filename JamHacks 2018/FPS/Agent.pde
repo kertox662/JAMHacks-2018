@@ -20,17 +20,14 @@ abstract class Agent {
         rotateZ(xAngle);
         rotateX(yAngle + PI/2);
         scale(scale);
-        try{
         shape(model);
-        }
-        catch(Exception e){}
         popMatrix();
     }
 }
 
 void loadModels() {
-    loadBushes();
     loadTrees();
+    loadBushes();
     loadGrass();
     loadGuns();
 }

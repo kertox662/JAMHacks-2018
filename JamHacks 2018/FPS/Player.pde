@@ -29,33 +29,41 @@ void initializePlayerData() {
     playerData[clientID] = mainPlayer;
 }
 
-String[] playerDataRaw = new String[playerData.length * 5 + 1];
+String[] playerDataRaw = new String[playerData.length * 5 + 2];
 int dataIndex = -1;
 void updatePlayerData() {
-    String[] playerDataRaw = getMostRecentMessages(playerData.length * 5 + 1);
-    for (int b = 0; b < playerDataRaw.length; b++) {
-        if (playerDataRaw[playerDataRaw.length - 1 - b] == "*" && messageIndex != serverMessages.length - 1) {
-            for (int i = 0; i < playerData.length; i++) {
-                if(i != clientID){
+    //return;
+    if (messageIndex != serverMessages.length - 1) {
+        println("Trying to get data");
+        playerDataRaw = getMostRecentMessages(playerData.length * 5 + 2);
+        for (int b = 0; b < playerDataRaw.length; b++) {
+            println(playerDataRaw[b]);
+        }
+        if (playerDataRaw[playerDataRaw.length - 2].equals("*")) {
+            println(true);
+            for (int i = 0; i < playerData.length; i++) { //For each player
+                if (i != clientID) {
+                    println(playerData[clientID], playerData[clientID] instanceof MainPlayer);
                     playerData[i].position.x = float(getNextData());
                     playerData[i].position.y = float(getNextData());
                     playerData[i].position.z = float(getNextData());
                     playerData[i].xAngle = float(getNextData());
                     playerData[i].yAngle = float(getNextData());
-                }else{
-                    for(int j = 0; j < 5; j++){
+                } else {
+                    for (int j = 0; j < 5; j++) {
                         getNextData();
                     }
                 }
             }
             dataIndex = -1;
-            break;
         }
+    }else{
+        println("No extra data");
     }
 }
 
-void drawPlayers(){
-    for(int i = 0; i < playerData.length; i++){
+void drawPlayers() {
+    for (int i = 0; i < playerData.length; i++) {
         playerData[i].display();
     }
 }
