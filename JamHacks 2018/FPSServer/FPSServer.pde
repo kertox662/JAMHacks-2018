@@ -8,6 +8,7 @@ void setup() {
     s = new Server(applet, 4531);
     playerData = new float[4][5];
     clientsConnected = new String[10];
+    println("IP is", Server.ip());
     loadTerrain();
     terrainString = dataToString(terrain);
     treeData = generateObjects(numTrees);
